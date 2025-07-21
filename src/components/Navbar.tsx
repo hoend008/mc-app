@@ -1,48 +1,65 @@
-import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material'
+import {
+  AppBar,
+  Box,
+  FormControlLabel,
+  FormGroup,
+  IconButton,
+  Switch,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 interface Props {
   handleDrawerToggle: () => void;
+  mode: boolean;
+  handleChange: () => void;
 }
 
-const Navbar = ({ handleDrawerToggle }: Props) => {
+const Navbar = ({ handleDrawerToggle, mode, handleChange }: Props) => {
   return (
     <AppBar
-        position="fixed"
-        sx={{
-          zIndex: (theme) => theme.zIndex.drawer + 1,
-        }}
-      >
-        <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Box>
-            <DashboardIcon
-              fontSize="large"
-              sx={{
-                display: { xs: "none", sm: "block" },
-                width: "8rem",
-              }}
+      position="fixed"
+      sx={{
+        zIndex: (theme) => theme.zIndex.drawer + 1,
+      }}
+    >
+      <Toolbar sx={{ justifyContent: "space-between" }}>
+        <Box>
+          <DashboardIcon
+            fontSize="large"
+            sx={{
+              display: { xs: "none", sm: "block" },
+              width: "8rem",
+            }}
+          />
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: "none" } }}
+          >
+            <MenuIcon fontSize="large" />
+          </IconButton>
+        </Box>
+        <Typography variant="h6">Title</Typography>
+        <Box sx={{ display: "flex" }}>
+          <FormGroup>
+            <FormControlLabel
+              control={<Switch checked={mode} onChange={handleChange} />}
+              label="Dark mode"
             />
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: "none" } }}
-            >
-              <MenuIcon fontSize="large" />
-            </IconButton>
-          </Box>
-          <Typography variant="h6">Title</Typography>
-          <Box>
-            <IconButton>
-              <LogoutIcon />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
-  )
-}
+          </FormGroup>
+          <IconButton>
+            <LogoutIcon />
+          </IconButton>
+        </Box>
+      </Toolbar>
+    </AppBar>
+  );
+};
 
-export default Navbar
+export default Navbar;
