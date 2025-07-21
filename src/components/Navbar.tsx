@@ -11,6 +11,8 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { useContext } from "react";
+import { useNavigate } from "react-router";
 
 interface Props {
   handleDrawerToggle: () => void;
@@ -19,6 +21,16 @@ interface Props {
 }
 
 const Navbar = ({ handleDrawerToggle, mode, handleChange }: Props) => {
+  //const { setAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const logout = async () => {
+    // if used in more components, this should be in context
+    // axios to /logout endpoint
+    //setAuth(emptyAuth);
+    navigate("/login");
+  };
+  
   return (
     <AppBar
       position="fixed"
@@ -53,7 +65,7 @@ const Navbar = ({ handleDrawerToggle, mode, handleChange }: Props) => {
               label="Dark mode"
             />
           </FormGroup>
-          <IconButton>
+          <IconButton onClick={logout}>
             <LogoutIcon />
           </IconButton>
         </Box>
