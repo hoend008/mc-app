@@ -1,5 +1,6 @@
 import { Box, Toolbar, Typography } from "@mui/material";
 import { drawerWidth } from "./Layout";
+import CountryDiv from "./CountryDiv";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       }}
     >
       <Toolbar />
+      <CountryDiv />
       <Typography sx={{ marginBottom: 2 }}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus

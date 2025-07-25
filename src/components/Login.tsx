@@ -53,16 +53,7 @@ const Login = () => {
     const params = new URLSearchParams();
     params.append("username", user);
     params.append("password", pwd);
-
-    // TEMPORARY (REPLACE BY AXIOS THING BELOW)
-    const accessToken: string = "bla";
-    const loggedIn: boolean = true;
-    setAuth({ user, accessToken, loggedIn });
-    setUser("");
-    setPwd("");
-    navigate("/home", { replace: true });
     
-    /*
     axios({
       method: "post",
       url: LOGIN_URL,
@@ -89,7 +80,7 @@ const Login = () => {
         }
         errRef.current?.focus();
       });
-      */
+      
     return () => controller.abort();
   };
 

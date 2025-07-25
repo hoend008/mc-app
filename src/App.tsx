@@ -7,6 +7,7 @@ import { useMediaQuery } from "@mui/material";
 import RequireAuth from "./components/RequireAuth";
 import Login from "./components/Login";
 import EmptyLayout from "./components/EmptyLayout";
+import { DataProvider } from "./context/dataProvider";
 
 function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -34,11 +35,14 @@ function App() {
           <Route path="login" element={<Login />} />
 
           {/* we want to protect these routes */}
-          <Route element={<RequireAuth />}>
-            <Route
-              path="/"
-              element={<EmptyLayout />}
-            />
+          <Route
+            element={
+              <DataProvider>
+                <RequireAuth />
+              </DataProvider>
+            }
+          >
+            <Route path="/" element={<EmptyLayout />} />
             <Route
               path="home"
               element={<Layout mode={mode} handleChange={handleChange} />}
