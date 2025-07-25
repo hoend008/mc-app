@@ -13,6 +13,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
+import AuthContext, { emptyAuth } from "../context/AuthProvider";
 
 interface Props {
   handleDrawerToggle: () => void;
@@ -21,13 +22,13 @@ interface Props {
 }
 
 const Navbar = ({ handleDrawerToggle, mode, handleChange }: Props) => {
-  //const { setAuth } = useContext(AuthContext);
+  const { setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const logout = async () => {
     // if used in more components, this should be in context
     // axios to /logout endpoint
-    //setAuth(emptyAuth);
+    setAuth(emptyAuth);
     navigate("/login");
   };
   
