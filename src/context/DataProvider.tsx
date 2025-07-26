@@ -1,3 +1,4 @@
+import { SelectChangeEvent } from "@mui/material";
 import {
   createContext,
   Dispatch,
@@ -7,8 +8,8 @@ import {
 } from "react";
 
 interface DataContextType {
-  country: string;
-  setCountry: Dispatch<SetStateAction<string>>;
+  countryID: string;
+  setCountryID: Dispatch<SetStateAction<string>>;
 }
 
 const DataContext = createContext<DataContextType>({} as DataContextType);
@@ -19,13 +20,15 @@ interface Props {
 
 export const DataProvider = ({ children }: Props) => {
   // set state variable that holds country and function to update country
-  const [country, setCountry] = useState("");
+  const [countryID, setCountryID] = useState("");
+
+
 
   return (
     <DataContext.Provider
       value={{
-        country,
-        setCountry
+        countryID,
+        setCountryID,
       }}
     >
       {children}

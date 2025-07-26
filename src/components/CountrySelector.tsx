@@ -19,10 +19,10 @@ const CountrySelector = () => {
   const { data: countries, error, isLoading } = useCountry(auth.accessToken);
 
   // set state variable that holds country and function to update country
-  const { country, setCountry } = useData();
+  const { countryID, setCountryID } = useData();
 
   const handleChange = (event: SelectChangeEvent) => {
-    setCountry(event.target.value as string);
+    setCountryID(event.target.value);
   };
 
   return (
@@ -32,12 +32,12 @@ const CountrySelector = () => {
         <Select
           labelId="country-select-label"
           id="country-select"
-          value={country}
+          value={countryID}
           label="Country"
           onChange={handleChange}
         >
           {countries?.map((country) => (
-            <MenuItem key={country.id} value={country.country}>
+            <MenuItem key={country.id} value={country.id}>
               {country.country}
             </MenuItem>
           ))}
