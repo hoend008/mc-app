@@ -22,8 +22,6 @@ export const DataProvider = ({ children }: Props) => {
   // set state variable that holds country and function to update country
   const [countryID, setCountryID] = useState("");
 
-
-
   return (
     <DataContext.Provider
       value={{

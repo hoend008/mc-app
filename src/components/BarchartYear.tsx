@@ -12,10 +12,6 @@ const BarchartYear = () => {
   const { countryID } = useData();
 
   // get sample year data
-  useEffect(() => {
-    //const { data, error, isLoading } = useSampleYear(auth.accessToken, countryID);
-  }, [countryID])
-  
   const { data, error, isLoading } = useSampleYear(auth.accessToken, countryID);
   
   return (    

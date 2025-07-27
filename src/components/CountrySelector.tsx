@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import useCountry from "../hooks/useCountry";
 import useAuth from "../hooks/useAuth";
-import { useState } from "react";
 import useData from "../hooks/useData";
 
 const CountrySelector = () => {
@@ -18,7 +17,7 @@ const CountrySelector = () => {
   // get countries
   const { data: countries, error, isLoading } = useCountry(auth.accessToken);
 
-  // set state variable that holds country and function to update country
+  // update state variable on change
   const { countryID, setCountryID } = useData();
 
   const handleChange = (event: SelectChangeEvent) => {
