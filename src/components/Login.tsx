@@ -3,6 +3,7 @@ import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router";
 import {
   Avatar,
+  Box,
   Button,
   FormGroup,
   FormLabel,
@@ -20,7 +21,7 @@ const Login = () => {
     padding: 20,
     height: "70vh",
     width: 280,
-    margin: "20px auto",
+    margin: "0 auto",
   };
   const formGroupStyle = { justifyContent: "center", alignItems: "center" };
   const formH2Style = { fontSize: 20, fontWeight: 700 };
@@ -53,7 +54,7 @@ const Login = () => {
     const params = new URLSearchParams();
     params.append("username", user);
     params.append("password", pwd);
-    
+
     axios({
       method: "post",
       url: LOGIN_URL,
@@ -80,52 +81,54 @@ const Login = () => {
         }
         errRef.current?.focus();
       });
-      
+
     return () => controller.abort();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Paper elevation={10} style={paperStyle}>
-        <FormGroup sx={formGroupStyle}>
-          <Avatar style={avatarStyle}>
-            <LockOutlineIcon />
-          </Avatar>
-          <FormLabel component="h2" sx={formH2Style}>
-            Sign In
-          </FormLabel>
-          <TextField
-            label="Username"
-            name="username"
-            placeholder="Enter username"
-            fullWidth
-            required
-            margin="normal"
-            inputRef={userRef}
-            onChange={(e) => setUser(e.target.value)}
-          />
-          <TextField
-            label="Password"
-            name="password"
-            placeholder="Enter password"
-            type="password"
-            fullWidth
-            required
-            onChange={(e) => setPwd(e.target.value)}
-          />
-          {errMsg && <Typography color="warning">{errMsg}</Typography>}
-          <Button
-            type="submit"
-            color="primary"
-            variant="contained"
-            style={btnstyle}
-            fullWidth
-          >
-            Login
-          </Button>
-        </FormGroup>
-      </Paper>
-    </form>
+    <Box sx={{ minHeight: "100dvh", bgcolor: "neutral.light" }}>
+      <form onSubmit={handleSubmit} style={{ paddingTop: "2rem" }}>
+        <Paper elevation={10} style={paperStyle}>
+          <FormGroup sx={formGroupStyle}>
+            <Avatar style={avatarStyle}>
+              <LockOutlineIcon />
+            </Avatar>
+            <FormLabel component="h2" sx={formH2Style}>
+              Sign In
+            </FormLabel>
+            <TextField
+              label="Username"
+              name="username"
+              placeholder="Enter username"
+              fullWidth
+              required
+              margin="normal"
+              inputRef={userRef}
+              onChange={(e) => setUser(e.target.value)}
+            />
+            <TextField
+              label="Password"
+              name="password"
+              placeholder="Enter password"
+              type="password"
+              fullWidth
+              required
+              onChange={(e) => setPwd(e.target.value)}
+            />
+            {errMsg && <Typography color="warning">{errMsg}</Typography>}
+            <Button
+              type="submit"
+              color="primary"
+              variant="contained"
+              style={btnstyle}
+              fullWidth
+            >
+              Login
+            </Button>
+          </FormGroup>
+        </Paper>
+      </form>
+    </Box>
   );
 };
 

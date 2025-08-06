@@ -11,6 +11,8 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LogoutIcon from "@mui/icons-material/Logout";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import AuthContext, { emptyAuth } from "../context/AuthProvider";
@@ -18,12 +20,11 @@ import useTheme from "../hooks/useTheme";
 
 interface Props {
   handleDrawerToggle: () => void;
-  mode: boolean;
 }
 
-const Navbar = ({ handleDrawerToggle, mode }: Props) => {
+const Navbar = ({ handleDrawerToggle }: Props) => {
   const { setAuth } = useContext(AuthContext);
-  const { handleChange } = useTheme();
+  const { mode, handleChange } = useTheme();
   const navigate = useNavigate();
 
   const logout = async () => {
@@ -32,7 +33,7 @@ const Navbar = ({ handleDrawerToggle, mode }: Props) => {
     setAuth(emptyAuth);
     navigate("/login");
   };
-  
+
   return (
     <AppBar
       position="fixed"
@@ -61,12 +62,9 @@ const Navbar = ({ handleDrawerToggle, mode }: Props) => {
         </Box>
         <Typography variant="h6">Title</Typography>
         <Box sx={{ display: "flex" }}>
-          <FormGroup>
-            <FormControlLabel
-              control={<Switch checked={mode} onChange={handleChange} />}
-              label="Dark mode"
-            />
-          </FormGroup>
+          <IconButton onClick={handleChange}>
+            {mode ? <DarkModeOutlinedIcon /> : <LightModeOutlinedIcon />}
+          </IconButton>
           <IconButton onClick={logout}>
             <LogoutIcon />
           </IconButton>

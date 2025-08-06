@@ -10,7 +10,7 @@ import { themeSettings } from "./theme";
 import useTheme from "./hooks/useTheme";
 
 function App() {
-  const { mode, handleChange } = useTheme();
+  const { mode } = useTheme();
 
   const appTheme = createTheme({
     palette: {
@@ -34,7 +34,7 @@ function App() {
             }
           >
             <Route path="/" element={<EmptyLayout />} />
-            <Route path="home" element={<Layout mode={mode} />}>
+            <Route path="home" element={<Layout/>}>
               <Route index element={<Home />} />
             </Route>
           </Route>

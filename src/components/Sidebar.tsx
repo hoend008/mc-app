@@ -1,4 +1,14 @@
-import { Box, Drawer, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from "@mui/material";
+import {
+  Box,
+  Drawer,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Toolbar,
+} from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import CountrySelector from "./CountrySelector";
@@ -12,14 +22,17 @@ interface Props {
   handleDrawerClose: () => void;
 }
 
-
-const Sidebar = ({ window, mobileOpen, handleDrawerTransitionEnd, handleDrawerClose }: Props) => {
-
+const Sidebar = ({
+  window,
+  mobileOpen,
+  handleDrawerTransitionEnd,
+  handleDrawerClose,
+}: Props) => {
   const container =
-  window !== undefined ? () => window().document.body : undefined;
+    window !== undefined ? () => window().document.body : undefined;
 
   const drawer = (
-    <div>
+    <Box sx={{ bgcolor: "neutral.light" }}>
       <Toolbar />
       <Divider />
       <CountrySelector />
@@ -36,53 +49,53 @@ const Sidebar = ({ window, mobileOpen, handleDrawerTransitionEnd, handleDrawerCl
           </ListItem>
         ))}
       </List>
-    </div>
-  )
+    </Box>
+  );
 
   return (
     <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
+      component="nav"
+      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+      aria-label="mailbox folders"
+    >
+      <Toolbar />
+      {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+      <Drawer
+        container={container}
+        variant="temporary"
+        open={mobileOpen}
+        onTransitionEnd={handleDrawerTransitionEnd}
+        onClose={handleDrawerClose}
+        sx={{
+          display: { xs: "block", sm: "none" },
+          "& .MuiDrawer-paper": {
+            boxSizing: "border-box",
+            width: drawerWidth,
+          },
+        }}
+        slotProps={{
+          root: {
+            keepMounted: true, // Better open performance on mobile.
+          },
+        }}
       >
-        <Toolbar />
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onTransitionEnd={handleDrawerTransitionEnd}
-          onClose={handleDrawerClose}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-          slotProps={{
-            root: {
-              keepMounted: true, // Better open performance on mobile.
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
-      </Box>
-  )
-}
+        {drawer}
+      </Drawer>
+      <Drawer
+        variant="permanent"
+        sx={{
+          display: { xs: "none", sm: "block" },
+          "& .MuiDrawer-paper": {
+            boxSizing: "border-box",
+            width: drawerWidth,
+          },
+        }}
+        open
+      >
+        {drawer}
+      </Drawer>
+    </Box>
+  );
+};
 
-export default Sidebar
+export default Sidebar;
