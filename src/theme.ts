@@ -125,15 +125,16 @@ export const themeSettings = (mode: boolean) => {
           main: colors.primary[100],
         },
         secondary: {
-          main: colors.greenAccent[500],
+          main: colors.greenAccent[300],
         },
         neutral: {
-          dark: colors.grey[700],
-          main: colors.grey[500],
+          dark: colors.grey[200],
+          main: colors.grey[600],
           light: colors.grey[700],
         },
         background: {
           default: colors.primary[500],
+          //paper: colors.grey[300],
         },
       }
     : {
@@ -141,15 +142,16 @@ export const themeSettings = (mode: boolean) => {
           main: colors.primary[500],
         },
         secondary: {
-          main: colors.greenAccent[500],
+          main: colors.greenAccent[100],
         },
         neutral: {
-          dark: colors.grey[700],
-          main: colors.grey[500],
+          dark: colors.grey[400],
+          main: colors.grey[800],
           light: colors.grey[900],
         },
         background: {
           default: "#fcfcfc",
+          //paper: colors.grey[100],
         },
       };
 };

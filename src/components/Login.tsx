@@ -16,13 +16,6 @@ import axios from "../services/axios";
 import { LOGIN_URL } from "../services/endpoint";
 
 const Login = () => {
-  // styles
-  const paperStyle = {
-    padding: 20,
-    height: "70vh",
-    width: 280,
-    margin: "0 auto",
-  };
   const formGroupStyle = { justifyContent: "center", alignItems: "center" };
   const formH2Style = { fontSize: 20, fontWeight: 700 };
   const avatarStyle = { marginTop: "20px", backgroundColor: "#1bbd7e" };
@@ -88,7 +81,15 @@ const Login = () => {
   return (
     <Box sx={{ minHeight: "100dvh", bgcolor: "neutral.light" }}>
       <form onSubmit={handleSubmit} style={{ paddingTop: "2rem" }}>
-        <Paper elevation={10} style={paperStyle}>
+        <Paper
+          elevation={10}
+          style={{
+            padding: 20,
+            height: "70vh",
+            width: 280,
+            margin: "0 auto",
+          }}
+        >
           <FormGroup sx={formGroupStyle}>
             <Avatar style={avatarStyle}>
               <LockOutlineIcon />

@@ -32,16 +32,16 @@ const Sidebar = ({
     window !== undefined ? () => window().document.body : undefined;
 
   const drawer = (
-    <Box sx={{ bgcolor: "neutral.light" }}>
+    <Box sx={{ bgcolor: "neutral.light", height: "100dvh" }}>
       <Toolbar />
       <Divider />
       <CountrySelector />
       <Divider />
       <List>
         {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
+          <ListItem key={text} disablePadding sx={{color: "neutral.dark"}}>
             <ListItemButton>
-              <ListItemIcon>
+              <ListItemIcon sx={{color: "neutral.dark"}}>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
               <ListItemText primary={text} />
@@ -54,8 +54,10 @@ const Sidebar = ({
 
   return (
     <Box
-      component="nav"
-      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+      sx={{
+        width: { sm: drawerWidth },
+        flexShrink: { sm: 0 },
+      }}
       aria-label="mailbox folders"
     >
       <Toolbar />
@@ -71,6 +73,7 @@ const Sidebar = ({
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
             width: drawerWidth,
+            
           },
         }}
         slotProps={{

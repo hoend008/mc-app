@@ -34,9 +34,20 @@ const CountrySelector = () => {
           value={countryID}
           label="Country"
           onChange={handleChange}
+          sx={{
+            color: "neutral.dark",
+            backgroundColor: "neutral.light",
+            ".MuiOutlinedInput-notchedOutline": {
+              borderColor: "secondary.main",
+            },
+          }}
         >
           {countries?.map((country) => (
-            <MenuItem key={country.id} value={country.id}>
+            <MenuItem
+              key={country.id}
+              value={country.id}
+              sx={{ color: "neutral.dark", backgroundColor: "neutral.main" }}
+            >
               {country.country}
             </MenuItem>
           ))}
