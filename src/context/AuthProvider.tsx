@@ -11,7 +11,7 @@ interface AuthContextType {
   setAuth: Dispatch<SetStateAction<authType>>;
 }
 
-const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+const AuthContext = createContext({} as AuthContextType);
 
 interface Props {
   children: ReactNode;

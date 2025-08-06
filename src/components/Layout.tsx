@@ -9,10 +9,9 @@ export const drawerWidth = 240;
 interface Props {
   window?: () => Window;
   mode: boolean;
-  handleChange: () => void;
 }
 
-const Layout = ({ window, mode, handleChange }: Props) => {
+const Layout = ({ window, mode }: Props) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
@@ -33,7 +32,7 @@ const Layout = ({ window, mode, handleChange }: Props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Navbar handleDrawerToggle={handleDrawerToggle} mode={mode} handleChange={handleChange}/>
+      <Navbar handleDrawerToggle={handleDrawerToggle} mode={mode}/>
       <Sidebar
         window={window}
         mobileOpen={mobileOpen}

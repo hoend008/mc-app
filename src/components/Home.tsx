@@ -1,8 +1,6 @@
-import { Box, Toolbar, Typography } from "@mui/material";
+import { Box, Toolbar } from "@mui/material";
 import { drawerWidth } from "./Layout";
-import CountryDiv from "./CountryDiv";
 import BarchartYear from "./BarchartYear";
-import ChoroplethSamples from "./ChoroplethSamples";
 
 const Home = () => {
   return (
@@ -15,9 +13,7 @@ const Home = () => {
       }}
     >
       <Toolbar />
-      <CountryDiv />
       <BarchartYear />
-      <ChoroplethSamples />
     </Box>
   );
 };

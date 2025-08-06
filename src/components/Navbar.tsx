@@ -14,15 +14,16 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import AuthContext, { emptyAuth } from "../context/AuthProvider";
+import useTheme from "../hooks/useTheme";
 
 interface Props {
   handleDrawerToggle: () => void;
   mode: boolean;
-  handleChange: () => void;
 }
 
-const Navbar = ({ handleDrawerToggle, mode, handleChange }: Props) => {
+const Navbar = ({ handleDrawerToggle, mode }: Props) => {
   const { setAuth } = useContext(AuthContext);
+  const { handleChange } = useTheme();
   const navigate = useNavigate();
 
   const logout = async () => {

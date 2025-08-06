@@ -699,37 +699,39 @@ const ChoroplethSamples = () => {
   const { data, error, isLoading } = useSampleCountry(auth.accessToken);
 
   return (
-    <ResponsiveChoropleth /* or Choropleth for fixed dimensions */
-      data={data}
-      features={world_features.features}
-      margin={{ top: 20, right: 0, bottom: 0, left: 0 }}
-      colors="YlOrRd"
-      domain={[0, 40000]}
-      unknownColor="#666666"
-      label="properties.name"
-      valueFormat=".2s"
-      projectionType="equirectangular"
-      enableGraticule={true}
-      graticuleLineColor="#dddddd"
-      borderWidth={0.5}
-      borderColor="#152538"
-      legends={[
-        {
-          anchor: "bottom-left",
-          direction: "column",
-          justify: true,
-          translateX: 20,
-          translateY: -100,
-          itemsSpacing: 0,
-          itemWidth: 94,
-          itemHeight: 18,
-          itemDirection: "left-to-right",
-          itemTextColor: "#444444",
-          itemOpacity: 0.85,
-          symbolSize: 18,
-        },
-      ]}
-    />
+    <div style={{ height: 600, width: 1200 }}>
+      <ResponsiveChoropleth /* or Choropleth for fixed dimensions */
+        data={data}
+        features={world_features.features}
+        margin={{ top: 20, right: 0, bottom: 0, left: 0 }}
+        colors="YlOrRd"
+        domain={[0, 40000]}
+        unknownColor="#666666"
+        label="properties.name"
+        valueFormat=".2s"
+        projectionType="equirectangular"
+        enableGraticule={true}
+        graticuleLineColor="#dddddd"
+        borderWidth={0.5}
+        borderColor="#152538"
+        legends={[
+          {
+            anchor: "bottom",
+            direction: "row",
+            justify: true,
+            translateX: 20,
+            translateY: -20,
+            itemsSpacing: 0,
+            itemWidth: 74,
+            itemHeight: 18,
+            itemDirection: "left-to-right",
+            itemTextColor: "#444444",
+            itemOpacity: 0.85,
+            symbolSize: 18,
+          },
+        ]}
+      />
+    </div>
   );
 };
 
