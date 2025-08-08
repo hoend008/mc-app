@@ -1,4 +1,4 @@
-import { Box, Card, Toolbar } from "@mui/material";
+import { Box, Card, Grid, Toolbar, Typography } from "@mui/material";
 import { drawerWidth } from "./Layout";
 import BarchartYear from "./BarchartYear";
 
@@ -14,16 +14,44 @@ const Home = () => {
       }}
     >
       <Toolbar />
-      <Card
-        sx={{
-          backgroundColor: "secondary.main",
-          border: 1,
-          borderColor: "border.main",
-          borderRadius: "0.6rem",
-        }}
-      >
-        <BarchartYear />
-      </Card>
+      <Grid container spacing={3}>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Typography variant="h4" sx={{ color: "text.main" }}>
+            Title
+          </Typography>
+          <Typography sx={{ color: "text.secondary" }}>
+            Some text on the graph here
+          </Typography>
+          <Card
+            sx={{
+              backgroundColor: "secondary.main",
+              border: 1,
+              borderColor: "border.main",
+              borderRadius: "0.6rem",
+            }}
+          >
+            <BarchartYear />
+          </Card>
+        </Grid>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Typography variant="h4" sx={{ color: "text.main" }}>
+            Title
+          </Typography>
+          <Typography sx={{ color: "text.secondary" }}>
+            Some text on the graph here
+          </Typography>
+          <Card
+            sx={{
+              backgroundColor: "secondary.main",
+              border: 1,
+              borderColor: "border.main",
+              borderRadius: "0.6rem",
+            }}
+          >
+            <BarchartYear />
+          </Card>
+        </Grid>
+      </Grid>
     </Box>
   );
 };

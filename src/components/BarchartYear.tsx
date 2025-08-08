@@ -14,7 +14,7 @@ const BarchartYear = () => {
   const { data, error, isLoading } = useSampleYear(auth.accessToken, countryID);
 
   return (
-    <div style={{ height: 500, width: 1000 }}>
+    <div style={{ height: "300px", width: "100%" }}>
       {data ? (
         <ResponsiveBar
           data={data}

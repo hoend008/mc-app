@@ -122,7 +122,7 @@ export const themeSettings = (mode: boolean) => {
   return mode
     ? {
         primary: {
-          main: "#1e0008", //colors.primary[100],
+          main: "#0a0a0a", //colors.primary[100],
         },
         secondary: {
           main: "#171717",
@@ -141,19 +141,25 @@ export const themeSettings = (mode: boolean) => {
           default: "#1e0008",
           //paper: colors.grey[300],
         },
-        text : {
-          main: "#e5e5e5"
+        text: {
+          main: "#e5e5e5",
+          secondary: "#a1a1a1",
         },
         border: {
-          main: "#ffffff1a"
-        }
+          main: "#ffffff1a",
+        },
       }
     : {
         primary: {
-          main: colors.primary[500],
+          //main: colors.primary[500],
+          main: "#ffffff",
         },
         secondary: {
-          main: colors.greenAccent[100],
+          //main: colors.greenAccent[100],
+          main: "#ffffff",
+        },
+        accent: {
+          green: "#5ea500",
         },
         neutral: {
           dark: colors.grey[400],
@@ -163,6 +169,13 @@ export const themeSettings = (mode: boolean) => {
         background: {
           default: "#fcfcfc",
           //paper: colors.grey[100],
+        },
+        text: {
+          main: "#0a0a0a",
+          secondary: "#737373",
+        },
+        border: {
+          main: "#e5e5e5",
         },
       };
 };
