@@ -122,10 +122,14 @@ export const themeSettings = (mode: boolean) => {
   return mode
     ? {
         primary: {
-          main: colors.primary[100],
+          main: "#1e0008", //colors.primary[100],
         },
         secondary: {
-          main: colors.greenAccent[300],
+          main: "#171717",
+          //main: colors.greenAccent[300],
+        },
+        accent: {
+          green: "#5ea500",
         },
         neutral: {
           dark: colors.grey[200],
@@ -133,9 +137,16 @@ export const themeSettings = (mode: boolean) => {
           light: colors.grey[700],
         },
         background: {
-          default: colors.primary[500],
+          //default: colors.primary[500],
+          default: "#1e0008",
           //paper: colors.grey[300],
         },
+        text : {
+          main: "#e5e5e5"
+        },
+        border: {
+          main: "#ffffff1a"
+        }
       }
     : {
         primary: {

@@ -79,7 +79,7 @@ const Login = () => {
   };
 
   return (
-    <Box sx={{ minHeight: "100dvh", bgcolor: "neutral.light" }}>
+    <Box sx={{ minHeight: "100dvh" }}>
       <form onSubmit={handleSubmit} style={{ paddingTop: "2rem" }}>
         <Paper
           elevation={10}

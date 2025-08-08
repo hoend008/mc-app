@@ -57,16 +57,22 @@ const Navbar = ({ handleDrawerToggle }: Props) => {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: "none" } }}
           >
-            <MenuIcon fontSize="large" />
+            <MenuIcon fontSize="large" sx={{ color: "text.main" }} />
           </IconButton>
         </Box>
-        <Typography variant="h6">Title</Typography>
+        <Typography variant="h6" sx={{ color: "text.main" }}>
+          Title
+        </Typography>
         <Box sx={{ display: "flex" }}>
           <IconButton onClick={handleChange}>
-            {mode ? <DarkModeOutlinedIcon /> : <LightModeOutlinedIcon />}
+            {mode ? (
+              <DarkModeOutlinedIcon sx={{ color: "text.main" }} />
+            ) : (
+              <LightModeOutlinedIcon sx={{ color: "text.main" }} />
+            )}
           </IconButton>
           <IconButton onClick={logout}>
-            <LogoutIcon />
+            <LogoutIcon sx={{ color: "text.main" }} />
           </IconButton>
         </Box>
       </Toolbar>

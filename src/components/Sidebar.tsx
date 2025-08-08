@@ -32,16 +32,16 @@ const Sidebar = ({
     window !== undefined ? () => window().document.body : undefined;
 
   const drawer = (
-    <Box sx={{ bgcolor: "neutral.light", height: "100dvh" }}>
+    <Box sx={{ bgcolor: "primary.main", height: "100dvh" }}>
       <Toolbar />
       <Divider />
       <CountrySelector />
       <Divider />
       <List>
         {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding sx={{color: "neutral.dark"}}>
+          <ListItem key={text} disablePadding sx={{color: "text.main"}}>
             <ListItemButton>
-              <ListItemIcon sx={{color: "neutral.dark"}}>
+              <ListItemIcon sx={{color: "text.main"}}>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
               <ListItemText primary={text} />

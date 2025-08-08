@@ -27,7 +27,7 @@ const CountrySelector = () => {
   return (
     <Box sx={{ margin: "1rem 1rem" }}>
       <FormControl fullWidth>
-        <InputLabel id="country-select-label">Country</InputLabel>
+        <InputLabel id="country-select-label" sx={{color: "text.main"}}>Country</InputLabel>
         <Select
           labelId="country-select-label"
           id="country-select"
@@ -35,10 +35,10 @@ const CountrySelector = () => {
           label="Country"
           onChange={handleChange}
           sx={{
-            color: "neutral.dark",
-            backgroundColor: "neutral.light",
+            color: "text.main",
+            backgroundColor: "secondary.main",
             ".MuiOutlinedInput-notchedOutline": {
-              borderColor: "secondary.main",
+              borderColor: "accent.green",
             },
           }}
         >
@@ -46,7 +46,7 @@ const CountrySelector = () => {
             <MenuItem
               key={country.id}
               value={country.id}
-              sx={{ color: "neutral.dark", backgroundColor: "neutral.main" }}
+              sx={{ color: "text.main", backgroundColor: "secondary.main" }}
             >
               {country.country}
             </MenuItem>
