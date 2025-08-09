@@ -152,11 +152,11 @@ export const themeSettings = (mode: boolean) => {
     : {
         primary: {
           //main: colors.primary[500],
-          main: "#ffffff",
+          main: "#F2F3F4",
         },
         secondary: {
           //main: colors.greenAccent[100],
-          main: "#ffffff",
+          main: "#F2F3F4",
         },
         accent: {
           green: "#5ea500",
