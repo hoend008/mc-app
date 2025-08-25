@@ -12,8 +12,8 @@ import {
   Typography,
 } from "@mui/material";
 import LockOutlineIcon from "@mui/icons-material/LockOutline";
-import axios from "../services/axios";
-import { LOGIN_URL } from "../services/endpoint";
+import axios from "../api/axios";
+import { LOGIN_URL } from "../api/endpoint";
 
 const Login = () => {
   const formGroupStyle = { justifyContent: "center", alignItems: "center" };

@@ -1,5 +1,4 @@
-import { queryOptions } from "@tanstack/react-query";
-import axios, { CanceledError } from "axios";
+import axios from "axios";
 
 export interface SampleYear {
   [key: string]: string | number;
@@ -19,12 +18,4 @@ const getSampleYear = async (accessToken: string, countryID: string) => {
   return data;
 };
 
-export default function createSampleYearQueryOptions(
-  accessToken: string,
-  countryID: string
-) {
-  return queryOptions({
-    queryKey: ["sampleyear", countryID],
-    queryFn: () => getSampleYear(accessToken, countryID),
-  });
-}
+export default getSampleYear;

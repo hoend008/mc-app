@@ -9,7 +9,7 @@ import {
 import useAuth from "../hooks/useAuth";
 import useData from "../hooks/useData";
 import { useQuery } from "@tanstack/react-query";
-import createCountriesQueryOptions from "../apiQueries/countries";
+import createCountriesQueryOptions from "../api/queryOptions/countryQueryOptions";
 
 const CountrySelector = () => {
   // get user authentication data

@@ -1,6 +1,7 @@
 import { Box, Card, Grid, Toolbar, Typography } from "@mui/material";
 import { drawerWidth } from "./Layout";
 import BarchartYear from "./BarchartYear";
+import BarchartYearApex from "./BarchartYearApex";
 
 const Home = () => {
   return (
@@ -9,7 +10,7 @@ const Home = () => {
         flexGrow: 1,
         p: 3,
         width: { sm: `calc(100% - ${drawerWidth}px)` },
-        height: "100dvh",
+        height: "100%",
         bgcolor: "primary.main",
       }}
     >
@@ -17,7 +18,7 @@ const Home = () => {
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h4" sx={{ color: "text.main" }}>
-            Title
+            Nivo Chart
           </Typography>
           <Typography sx={{ color: "text.secondary" }}>
             Some text on the graph here
@@ -33,9 +34,10 @@ const Home = () => {
             <BarchartYear />
           </Card>
         </Grid>
+
         <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h4" sx={{ color: "text.main" }}>
-            Title
+            Apex Chart
           </Typography>
           <Typography sx={{ color: "text.secondary" }}>
             Some text on the graph here
@@ -48,7 +50,7 @@ const Home = () => {
               borderRadius: "0.6rem",
             }}
           >
-            <BarchartYear />
+            <BarchartYearApex />
           </Card>
         </Grid>
       </Grid>
