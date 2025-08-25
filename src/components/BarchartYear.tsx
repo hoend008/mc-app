@@ -1,9 +1,20 @@
+import { Typography } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import { ResponsiveBar } from "@nivo/bar";
-import useSampleYear from "../hooks/useSampleYear";
 import useAuth from "../hooks/useAuth";
 import useData from "../hooks/useData";
+import { useQuery } from "@tanstack/react-query";
+import createSampleYearQueryOptions from "../apiQueries/sampleYear";
 
 const BarchartYear = () => {
+  // styles
+  const defaultDiv = { height: "300px", width: "100%" };
+  const extraDiv = {
+    justifyContent: "center",
+    alignItems: "center",
+    display: "flex",
+  };
+
   // get user authentication data
   const { auth } = useAuth();
 
@@ -11,10 +22,28 @@ const BarchartYear = () => {
   const { countryID } = useData();
 
   // get sample year data
-  const { data, error, isLoading } = useSampleYear(auth.accessToken, countryID);
+  const { data, error, isPending } = useQuery(
+    createSampleYearQueryOptions(auth.accessToken, countryID)
+  );
+
+  if (error)
+    return (
+      <div style={{ ...defaultDiv, ...extraDiv }}>
+        <Typography variant="h6" color="warning">
+          Oops, something went wrong
+        </Typography>
+      </div>
+    );
+
+  if (isPending)
+    return (
+      <div style={{ ...defaultDiv, ...extraDiv }}>
+        <CircularProgress color="success" size="5rem" />
+      </div>
+    );
 
   return (
-    <div style={{ height: "300px", width: "100%" }}>
+    <div style={defaultDiv}>
       {data ? (
         <ResponsiveBar
           data={data}

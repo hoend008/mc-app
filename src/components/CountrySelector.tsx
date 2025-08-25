@@ -6,16 +6,19 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import useCountry from "../hooks/useCountry";
 import useAuth from "../hooks/useAuth";
 import useData from "../hooks/useData";
+import { useQuery } from "@tanstack/react-query";
+import createCountriesQueryOptions from "../apiQueries/countries";
 
 const CountrySelector = () => {
   // get user authentication data
   const { auth } = useAuth();
 
   // get countries
-  const { data: countries, error, isLoading } = useCountry(auth.accessToken);
+  const { data: countries } = useQuery(
+    createCountriesQueryOptions(auth.accessToken)
+  );
 
   // update state variable on change
   const { countryID, setCountryID } = useData();
@@ -27,7 +30,9 @@ const CountrySelector = () => {
   return (
     <Box sx={{ margin: "1rem 1rem" }}>
       <FormControl fullWidth>
-        <InputLabel id="country-select-label" sx={{color: "text.main"}}>Country</InputLabel>
+        <InputLabel id="country-select-label" sx={{ color: "text.main" }}>
+          Country
+        </InputLabel>
         <Select
           labelId="country-select-label"
           id="country-select"
