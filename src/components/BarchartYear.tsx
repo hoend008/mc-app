@@ -5,6 +5,8 @@ import useAuth from "../hooks/useAuth";
 import useData from "../hooks/useData";
 import { useQuery } from "@tanstack/react-query";
 import createSampleYearQueryOptions from "../api/queryOptions/sampleYearQueryOptions";
+import useTheme from "../hooks/useTheme";
+import { themeSettings } from "../themes/theme";
 
 const BarchartYear = () => {
   // styles
@@ -14,6 +16,9 @@ const BarchartYear = () => {
     alignItems: "center",
     display: "flex",
   };
+
+  const { mode } = useTheme();
+  const chartMainColor = themeSettings(mode);
 
   // get user authentication data
   const { auth } = useAuth();
@@ -61,9 +66,11 @@ const BarchartYear = () => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "degrees",
-            legendPosition: "middle",
-            legendOffset: -40,
+          }}
+          theme={{
+            axis: {
+              ticks: { text: { fill: chartMainColor.text.main } },
+            },
           }}
         />
       ) : null}

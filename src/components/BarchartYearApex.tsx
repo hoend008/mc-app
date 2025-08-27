@@ -4,6 +4,8 @@ import useData from "../hooks/useData";
 import createSampleYearQueryOptions from "../api/queryOptions/sampleYearQueryOptions";
 import Chart from "react-apexcharts";
 import { CircularProgress, Typography } from "@mui/material";
+import { themeSettings } from "../themes/theme";
+import useTheme from "../hooks/useTheme";
 
 const BarchartYearApex = () => {
   // styles
@@ -13,6 +15,9 @@ const BarchartYearApex = () => {
     alignItems: "center",
     display: "flex",
   };
+
+  const { mode } = useTheme();
+  const chartMainColor = themeSettings(mode);
 
   // get user authentication data
   const { auth } = useAuth();
@@ -33,9 +38,21 @@ const BarchartYearApex = () => {
   ];
 
   const options = {
-    colors: ["#5ea500"],
+    colors: [chartMainColor.accent.green],
     xaxis: {
       categories: data ? data.map((x) => x.year as string) : [],
+      labels: {
+        style: {
+          colors: Array(data?.length).fill(chartMainColor.text.main),
+        },
+      },
+    },
+    yaxis: {
+      labels: {
+        style: {
+          colors: Array(data?.length).fill(chartMainColor.text.main),
+        },
+      },
     },
     chart: {
       background: "primary.main",
