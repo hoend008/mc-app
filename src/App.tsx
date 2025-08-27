@@ -1,9 +1,9 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Route, Routes } from "react-router";
 import Layout from "./components/Layout";
-import Home from "./components/Home";
+import Home from "./pages/Home";
 import RequireAuth from "./components/RequireAuth";
-import Login from "./components/Login";
+import Login from "./pages/Login";
 import EmptyLayout from "./components/EmptyLayout";
 import { DataProvider } from "./context/DataProvider";
 import { themeSettings } from "./themes/theme";

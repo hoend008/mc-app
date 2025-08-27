@@ -1,7 +1,7 @@
 import { Box, Card, Grid, Toolbar, Typography } from "@mui/material";
-import { drawerWidth } from "./Layout";
-import BarchartYear from "./BarchartYear";
-import BarchartYearApex from "./BarchartYearApex";
+import { drawerWidth } from "../components/Layout";
+import BarchartYear from "../components/BarchartYear";
+import BarchartYearApex from "../components/BarchartYearApex";
 
 const Home = () => {
   return (
