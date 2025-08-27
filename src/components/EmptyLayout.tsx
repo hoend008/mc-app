@@ -1,14 +1,12 @@
 import { Outlet } from "react-router";
-import useAuth from "../hooks/useAuth";
+import { Box } from "@mui/material";
 
 const EmptyLayout = () => {
-  const { auth } = useAuth();
-
   // show navbar when user is logged in (don't show on login page when user not yet logged in)
   return (
-    <main className="App">
+    <Box>
       <Outlet />
-    </main>
+    </Box>
   );
 };
 

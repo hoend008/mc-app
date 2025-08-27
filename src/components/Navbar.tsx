@@ -1,10 +1,7 @@
 import {
   AppBar,
   Box,
-  FormControlLabel,
-  FormGroup,
   IconButton,
-  Switch,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -66,9 +63,9 @@ const Navbar = ({ handleDrawerToggle }: Props) => {
         <Box sx={{ display: "flex" }}>
           <IconButton onClick={handleChange}>
             {mode ? (
-              <DarkModeOutlinedIcon sx={{ color: "text.main" }} />
-            ) : (
               <LightModeOutlinedIcon sx={{ color: "text.main" }} />
+            ) : (
+              <DarkModeOutlinedIcon sx={{ color: "text.main" }} />
             )}
           </IconButton>
           <IconButton onClick={logout}>

@@ -6,7 +6,7 @@ import RequireAuth from "./components/RequireAuth";
 import Login from "./components/Login";
 import EmptyLayout from "./components/EmptyLayout";
 import { DataProvider } from "./context/DataProvider";
-import { themeSettings } from "./theme";
+import { themeSettings } from "./themes/theme";
 import useTheme from "./hooks/useTheme";
 
 function App() {

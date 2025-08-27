@@ -62,7 +62,6 @@ const Sidebar = ({
       aria-label="mailbox folders"
     >
       <Toolbar />
-      {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
       <Drawer
         container={container}
         variant="temporary"
@@ -91,6 +90,7 @@ const Sidebar = ({
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
             width: drawerWidth,
+            borderColor: "neutral.main",
           },
         }}
         open

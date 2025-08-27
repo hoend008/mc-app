@@ -34,7 +34,6 @@ const Home = () => {
             <BarchartYear />
           </Card>
         </Grid>
-
         <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h4" sx={{ color: "text.main" }}>
             Apex Chart

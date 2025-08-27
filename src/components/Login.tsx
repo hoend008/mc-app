@@ -17,7 +17,11 @@ import { LOGIN_URL } from "../api/endpoint";
 
 const Login = () => {
   const formGroupStyle = { justifyContent: "center", alignItems: "center" };
-  const formH2Style = { fontSize: 20, fontWeight: 700 };
+  const formH2Style = {
+    fontSize: 20,
+    fontWeight: 700,
+    color: "text.main",
+  };
   const avatarStyle = { marginTop: "20px", backgroundColor: "#1bbd7e" };
   const btnstyle = { margin: "20px 0" };
 
@@ -79,7 +83,7 @@ const Login = () => {
   };
 
   return (
-    <Box sx={{ minHeight: "100dvh" }}>
+    <Box sx={{ minHeight: "100dvh", backgroundColor: "primary.main" }}>
       <form onSubmit={handleSubmit} style={{ paddingTop: "2rem" }}>
         <Paper
           elevation={10}
@@ -88,7 +92,9 @@ const Login = () => {
             height: "70vh",
             width: 280,
             margin: "0 auto",
+            borderRadius: "10px",
           }}
+          sx={{ backgroundColor: "neutral.light" }}
         >
           <FormGroup sx={formGroupStyle}>
             <Avatar style={avatarStyle}>
@@ -106,6 +112,15 @@ const Login = () => {
               margin="normal"
               inputRef={userRef}
               onChange={(e) => setUser(e.target.value)}
+              sx={{
+                input: {
+                  "&::placeholder": {
+                    color: "text.main",
+                  },
+                  color: "text.main"
+                },
+                fieldset: { borderColor: "primary.main" },
+              }}
             />
             <TextField
               label="Password"
@@ -115,6 +130,7 @@ const Login = () => {
               fullWidth
               required
               onChange={(e) => setPwd(e.target.value)}
+              sx={{ fieldset: { borderColor: "primary.main" } }}
             />
             {errMsg && <Typography color="warning">{errMsg}</Typography>}
             <Button
@@ -122,6 +138,7 @@ const Login = () => {
               color="primary"
               variant="contained"
               style={btnstyle}
+              sx={{ color: "text.main" }}
               fullWidth
             >
               Login
