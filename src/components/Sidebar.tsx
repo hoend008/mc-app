@@ -12,6 +12,7 @@ import {
 import MailIcon from "@mui/icons-material/Mail";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import CountrySelector from "./CountrySelector";
+import CountrySelect from "./CountrySelect";
 
 export const drawerWidth = 240;
 
@@ -36,6 +37,7 @@ const Sidebar = ({
       <Toolbar />
       <Divider />
       <CountrySelector />
+      <CountrySelect />
       <Divider />
       <List>
         {["All mail", "Trash", "Spam"].map((text, index) => (

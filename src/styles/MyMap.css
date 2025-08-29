@@ -1,0 +1,61 @@
+.leaflet-container {
+  background-color: rgb(178, 210, 222);
+}
+
+path.leaflet-interactive {
+  outline: none;
+}
+
+.leaflet-popup-content-wrapper {
+  background: rgb(178, 210, 222);
+  border-radius: 5px;
+  border: 1px solid rgb(146, 140, 140);
+  text-transform: capitalize;
+  font-size: 1rem;
+}
+
+.leaflet-tooltip {
+  background: rgb(178, 210, 222);
+  border-radius: 5px;
+  border: 1px solid rgb(146, 140, 140);
+  text-transform: capitalize;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.leaflet-tooltip-left:before {
+  border-left-color: rgb(59, 81, 89) !important;
+}
+
+.leaflet-tooltip-right:before {
+  border-right-color: rgb(59, 81, 89) !important;
+}
+
+.leaflet-tooltip-top:before {
+  border-top-color: rgb(59, 81, 89) !important;
+}
+
+.leaflet-tooltip-bottom:before {
+  border-bottom-color: rgb(59, 81, 89) !important;
+}
+
+.MapInfoBox {
+  padding: 6px 8px;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  width: 12rem;
+  height: 6rem;
+  margin: 5px;
+}
+
+.LegendBox {
+  margin-left: 5px;
+  margin-bottom: 5px;
+  padding: 6px 8px;
+  background-color: white;
+  border-radius: 5px;
+  width: 6rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}

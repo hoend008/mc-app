@@ -24,6 +24,7 @@ const CountrySelector = () => {
   const { countryID, setCountryID } = useData();
 
   const handleChange = (event: SelectChangeEvent) => {
+    console.log(event.target.value);
     setCountryID(event.target.value);
   };
 

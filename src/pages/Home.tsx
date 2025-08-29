@@ -2,8 +2,13 @@ import { Box, Card, Grid, Toolbar, Typography } from "@mui/material";
 import { drawerWidth } from "../components/Layout";
 import BarchartYear from "../components/BarchartYear";
 import BarchartYearApex from "../components/BarchartYearApex";
+import MyMap from "../components/map/MyMap";
+import useData from "../hooks/useData";
 
 const Home = () => {
+
+  const { selectedFeature, setSelectedFeature, densityData } = useData();
+  
   return (
     <Box
       sx={{
@@ -15,6 +20,11 @@ const Home = () => {
       }}
     >
       <Toolbar />
+      <MyMap
+        selectedFeature={selectedFeature}
+        setSelectedFeature={setSelectedFeature}
+        densityData={densityData}
+      />
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h4" sx={{ color: "text.main" }}>
