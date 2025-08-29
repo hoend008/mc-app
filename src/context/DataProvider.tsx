@@ -14,8 +14,8 @@ interface Density {
 }
 
 interface DataContextType {
-  countryID: string;
-  setCountryID: Dispatch<SetStateAction<string>>;
+  countryCode: string;
+  setCountryCode: Dispatch<SetStateAction<string>>;
   selectedFeature: any;
   setSelectedFeature: Dispatch<any>;
   handleDistrictChange: (e: SelectChangeEvent) => void;
@@ -30,7 +30,7 @@ interface Props {
 
 export const DataProvider = ({ children }: Props) => {
   // set state variable that holds country and function to update country
-  const [countryID, setCountryID] = useState("");
+  const [countryCode, setCountryCode] = useState("");
 
   // theming
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -41,10 +41,10 @@ export const DataProvider = ({ children }: Props) => {
 
   const handleDistrictChange = (e: SelectChangeEvent) => {
     const iso_a3 = e.target.value;
-    console.log(iso_a3);
     const countryProps = densityData.find((e) => e.iso_a3 === iso_a3);
     if (countryProps) {
       setSelectedFeature(countryProps);
+      setCountryCode(iso_a3);
     } else {
       return;
     }
@@ -53,8 +53,8 @@ export const DataProvider = ({ children }: Props) => {
   return (
     <DataContext.Provider
       value={{
-        countryID,
-        setCountryID,
+        countryCode,
+        setCountryCode,
         selectedFeature,
         setSelectedFeature,
         handleDistrictChange,

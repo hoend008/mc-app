@@ -21,11 +21,10 @@ const CountrySelector = () => {
   );
 
   // update state variable on change
-  const { countryID, setCountryID } = useData();
+  const { countryCode, setCountryCode } = useData();
 
   const handleChange = (event: SelectChangeEvent) => {
-    console.log(event.target.value);
-    setCountryID(event.target.value);
+    setCountryCode(event.target.value);
   };
 
   return (
@@ -37,7 +36,7 @@ const CountrySelector = () => {
         <Select
           labelId="country-select-label"
           id="country-select"
-          value={countryID}
+          value={countryCode}
           label="Country"
           onChange={handleChange}
           sx={{
@@ -50,8 +49,8 @@ const CountrySelector = () => {
         >
           {countries?.map((country) => (
             <MenuItem
-              key={country.id}
-              value={country.id}
+              key={country.code3}
+              value={country.code3}
               sx={{ color: "text.main", backgroundColor: "secondary.main" }}
             >
               {country.country}

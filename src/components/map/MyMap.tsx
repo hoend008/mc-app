@@ -10,6 +10,7 @@ import usePrevious from "react-use-previous";
 import createMapData from "../../hooks/useGeoDensityData";
 import Legend from "./Legend";
 import MapInfoBox from "./MapInfoBox";
+import useData from "../../hooks/useData";
 
 const COLOR_SELECT = "yellow";
 const WEIGHT_SELECT = 2;
@@ -26,6 +27,8 @@ interface Props {
 }
 
 const MyMap = ({ selectedFeature, setSelectedFeature, densityData }: Props) => {
+  const { setCountryCode } = useData();
+
   const geoJsonRef = useRef(null);
 
   // update geodata with density data
@@ -52,8 +55,10 @@ const MyMap = ({ selectedFeature, setSelectedFeature, densityData }: Props) => {
       previousFeature?.current?.iso_a3 !== layer.feature.properties.iso_a3
     ) {
       setSelectedFeature(layer.feature.properties);
+      setCountryCode(layer.feature.properties.iso_a3.toLowerCase());
     } else {
       resetSelect();
+      setCountryCode("");
     }
   };
 
@@ -110,7 +115,6 @@ const MyMap = ({ selectedFeature, setSelectedFeature, densityData }: Props) => {
             layer.feature.properties.iso_a3.toLowerCase() ===
             selectedFeature.iso_a3.toLowerCase()
         );
-      console.log(layer2);
       let mapStyle = {
         fillColor: COLOR_SELECT,
         weight: WEIGHT_SELECT,
@@ -125,7 +129,7 @@ const MyMap = ({ selectedFeature, setSelectedFeature, densityData }: Props) => {
   return (
     <div>
       <MapContainer
-        style={{ height: "75vh", width: "70vw" }}
+        style={{ height: "75vh", width: "75vw" }}
         zoom={2}
         center={[25, 10]}
       >

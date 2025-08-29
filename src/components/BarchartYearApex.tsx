@@ -23,11 +23,11 @@ const BarchartYearApex = () => {
   const { auth } = useAuth();
 
   // get country info
-  const { countryID } = useData();
+  const { countryCode } = useData();
 
   // get sample year data
   const { data, error, isPending } = useQuery(
-    createSampleYearQueryOptions(auth.accessToken, countryID)
+    createSampleYearQueryOptions(auth.accessToken, countryCode)
   );
 
   const series = [
