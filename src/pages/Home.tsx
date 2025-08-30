@@ -6,13 +6,12 @@ import MyMap from "../components/map/MyMap";
 import useData from "../hooks/useData";
 
 const Home = () => {
-  const { selectedFeature, setSelectedFeature, densityData } = useData();
 
   return (
     <Box
       sx={{
         flexGrow: 1,
-        p: 3,
+        p: 2,
         width: { sm: `calc(100% - ${drawerWidth}px)` },
         height: { sm: "100%", md: "100%" },
         bgcolor: "primary.main",
@@ -36,11 +35,7 @@ const Home = () => {
             alignItems="center"
             justifyContent="center"
           >
-            <MyMap
-              selectedFeature={selectedFeature}
-              setSelectedFeature={setSelectedFeature}
-              densityData={densityData}
-            />
+            <MyMap />
           </Grid>
         </Card>
         <Grid container spacing={3}>

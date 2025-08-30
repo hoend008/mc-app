@@ -11,25 +11,33 @@ import createMapData from "../../hooks/useGeoDensityData";
 import Legend from "./Legend";
 import MapInfoBox from "./MapInfoBox";
 import useData from "../../hooks/useData";
+//import densityData from "../../data/testdata.json";
+import { useQuery } from "@tanstack/react-query";
+import createSampleCountryQueryOptions from "../../api/queryOptions/sampleCountryQueryOptions";
+import useAuth from "../../hooks/useAuth";
 
 const COLOR_SELECT = "yellow";
 const WEIGHT_SELECT = 2;
 
-interface Density {
-  iso_a3: string;
-  density: number;
-}
+//interface Density {
+//  iso_a3: string;
+//  density: number;
+//}
 
-interface Props {
-  selectedFeature: any;
-  setSelectedFeature: React.Dispatch<any>;
-  densityData: Density[];
-}
-
-const MyMap = ({ selectedFeature, setSelectedFeature, densityData }: Props) => {
-  const { setCountryCode } = useData();
+const MyMap = () => {
+  const { selectedFeature, setSelectedFeature, setCountryCode } = useData();
 
   const geoJsonRef = useRef(null);
+
+  // get user authentication data
+  const { auth } = useAuth();
+
+  // get density data
+  const {
+    data: densityData,
+    error,
+    isPending,
+  } = useQuery(createSampleCountryQueryOptions(auth.accessToken));
 
   // update geodata with density data
   createMapData(geodata, densityData);
@@ -52,11 +60,13 @@ const MyMap = ({ selectedFeature, setSelectedFeature, densityData }: Props) => {
     // previous selected feature -> setSelectedFeature. Otherwise, reset
     if (
       !previousFeature ||
-      previousFeature?.current?.iso_a3 !== layer.feature.properties.iso_a3
+      previousFeature.current !== layer.feature.properties.iso_a3.toLowerCase()
     ) {
-      setSelectedFeature(layer.feature.properties);
+      //setSelectedFeature(layer.feature.properties);
+      setSelectedFeature(layer.feature.properties.iso_a3.toLowerCase());
       setCountryCode(layer.feature.properties.iso_a3.toLowerCase());
     } else {
+      console.log("resetting...");
       resetSelect();
       setCountryCode("");
     }
@@ -96,7 +106,8 @@ const MyMap = ({ selectedFeature, setSelectedFeature, densityData }: Props) => {
     if (
       selectedFeature &&
       feature.properties.iso_a3.toLowerCase() ===
-        selectedFeature.iso_a3.toLowerCase()
+        //selectedFeature.iso_a3.toLowerCase()
+        selectedFeature
     ) {
       mapStyle.fillColor = COLOR_SELECT;
       mapStyle.weight = WEIGHT_SELECT;
@@ -108,13 +119,12 @@ const MyMap = ({ selectedFeature, setSelectedFeature, densityData }: Props) => {
   useEffect(() => {
     if (geoJsonRef.current && selectedFeature) {
       const layer: any = geoJsonRef.current;
-      let layer2 = layer
-        .getLayers()
-        .find(
-          (layer: any) =>
-            layer.feature.properties.iso_a3.toLowerCase() ===
-            selectedFeature.iso_a3.toLowerCase()
-        );
+      let layer2 = layer.getLayers().find(
+        (layer: any) =>
+          layer.feature.properties.iso_a3.toLowerCase() ===
+          //selectedFeature.iso_a3.toLowerCase()
+          selectedFeature
+      );
       let mapStyle = {
         fillColor: COLOR_SELECT,
         weight: WEIGHT_SELECT,

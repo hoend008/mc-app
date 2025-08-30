@@ -6,20 +6,12 @@ import {
   SetStateAction,
   useState,
 } from "react";
-import densityData from "../data/testdata.json";
-
-interface Density {
-  iso_a3: string;
-  density: number;
-}
 
 interface DataContextType {
   countryCode: string;
   setCountryCode: Dispatch<SetStateAction<string>>;
   selectedFeature: any;
   setSelectedFeature: Dispatch<any>;
-  handleDistrictChange: (e: SelectChangeEvent) => void;
-  densityData: Density[];
 }
 
 const DataContext = createContext({} as DataContextType);
@@ -39,17 +31,6 @@ export const DataProvider = ({ children }: Props) => {
   // for map
   const [selectedFeature, setSelectedFeature] = useState<any>(null);
 
-  const handleDistrictChange = (e: SelectChangeEvent) => {
-    const iso_a3 = e.target.value;
-    const countryProps = densityData.find((e) => e.iso_a3 === iso_a3);
-    if (countryProps) {
-      setSelectedFeature(countryProps);
-      setCountryCode(iso_a3);
-    } else {
-      return;
-    }
-  };
-
   return (
     <DataContext.Provider
       value={{
@@ -57,8 +38,6 @@ export const DataProvider = ({ children }: Props) => {
         setCountryCode,
         selectedFeature,
         setSelectedFeature,
-        handleDistrictChange,
-        densityData,
       }}
     >
       {children}

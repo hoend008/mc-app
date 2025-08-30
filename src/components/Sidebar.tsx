@@ -36,7 +36,6 @@ const Sidebar = ({
     <Box sx={{ bgcolor: "primary.main", height: "100dvh" }}>
       <Toolbar />
       <Divider />
-      <CountrySelector />
       <CountrySelect />
       <Divider />
       <List>

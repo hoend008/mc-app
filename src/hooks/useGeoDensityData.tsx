@@ -1,6 +1,8 @@
 import { mapPolygonColorToDensity } from "../components/map/ColorUtils";
 
 const createMapData = (geodata: any, densityData: any) => {
+  console.log("geodensity data...");
+  console.log(densityData);
   // loop over geodata.features
   for (const key in geodata.features) {
     // get code3 from geodata features
