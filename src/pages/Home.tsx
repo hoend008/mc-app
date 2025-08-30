@@ -6,7 +6,6 @@ import MyMap from "../components/map/MyMap";
 import useData from "../hooks/useData";
 
 const Home = () => {
-
   return (
     <Box
       sx={{
@@ -31,11 +30,14 @@ const Home = () => {
         >
           <Grid
             container
-            direction="column"
+            direction="row"
             alignItems="center"
             justifyContent="center"
           >
             <MyMap />
+            <Box style={{ width: "20vh", height: "70vh", backgroundColor: "red" }}>
+              Speedometer
+            </Box>
           </Grid>
         </Card>
         <Grid container spacing={3}>

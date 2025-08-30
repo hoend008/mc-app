@@ -56,8 +56,10 @@ const MyMap = () => {
       !previousFeature ||
       previousFeature.current !== layer.feature.properties.iso_a3.toLowerCase()
     ) {
-      setSelectedFeature(layer.feature.properties.iso_a3.toLowerCase());
-      setCountryCode(layer.feature.properties.iso_a3.toLowerCase());
+      if (layer.feature.properties.density) {
+        setSelectedFeature(layer.feature.properties.iso_a3.toLowerCase());
+        setCountryCode(layer.feature.properties.iso_a3.toLowerCase());
+      }
     } else {
       console.log("resetting...");
       resetSelect();
@@ -155,7 +157,7 @@ const MyMap = () => {
     <div>
       {isSuccess ? (
         <MapContainer
-          style={{ height: "75vh", width: "75vw" }}
+          style={{ height: "70vh", width: "70vw" }}
           zoom={2}
           center={[25, 10]}
         >
@@ -165,7 +167,7 @@ const MyMap = () => {
             onEachFeature={onEachCountry}
             ref={geoJsonRef}
           />
-          <div style={{ position: "absolute", bottom: 0, zIndex: 2000 }}>
+          <div style={{ position: "absolute", bottom: 0, zIndex: 1000 }}>
             <Legend />
             {hoveredFeature ? (
               <MapInfoBox selectedFeature={hoveredFeature} />
