@@ -24,7 +24,6 @@ const CountrySelect = () => {
 
   const handleDistrictChange = (e: SelectChangeEvent) => {
     const iso_a3 = e.target.value;
-    console.log(iso_a3);
     //const countryProps = densityData.find((e) => e.iso_a3 === iso_a3);
     //if (countryProps) {
     if (iso_a3) {
@@ -50,9 +49,7 @@ const CountrySelect = () => {
           }}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={
-            selectedFeature ? selectedFeature : ""
-          }
+          value={selectedFeature ? selectedFeature : ""}
           label="Countries"
           onChange={handleDistrictChange}
         >

@@ -38,8 +38,8 @@ const MapInfoBox = ({ selectedFeature }: Props) => {
             <div
               style={{
                 display: "flex",
-                width: "3.5rem",
-                height: "3.5rem",
+                width: "5rem",
+                height: "5rem",
                 backgroundColor: "#E0E0E0",
                 opacity: 1,
                 borderRadius: "50%",
@@ -49,7 +49,7 @@ const MapInfoBox = ({ selectedFeature }: Props) => {
                 style={{
                   color: "black",
                   opacity: 1,
-                  fontSize: 30,
+                  fontSize: 20,
                   margin: "auto",
                 }}
               >

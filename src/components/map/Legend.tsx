@@ -1,29 +1,31 @@
+import { Box, Typography } from "@mui/material";
 import { MAPCOLORS } from "./ColorUtils";
 
 const Legend = () => {
   return (
-    <div className={"LegendBox"}>
-      {MAPCOLORS.map((c) => (
-        <div
-          key={c.value}
-          style={{
-            display: "flex",
-            gap: 5,
-            alignItems: "center",
-          }}
-        >
+      <Box className={"LegendBox"}>
+      <Typography variant="h5">Legend</Typography>
+        {MAPCOLORS.map((c) => (
           <div
             key={c.value}
             style={{
-              width: "2rem",
-              height: "2rem",
-              backgroundColor: c.color,
+              display: "flex",
+              gap: 5,
+              alignItems: "center",
             }}
-          ></div>
-          <div style={{ fontSize: 14 }}>{c.range}</div>
-        </div>
-      ))}
-    </div>
+          >
+            <div
+              key={c.value}
+              style={{
+                width: "1rem",
+                height: "1rem",
+                backgroundColor: c.color,
+              }}
+            ></div>
+            <div style={{ fontSize: 14 }}>{c.range}</div>
+          </div>
+        ))}
+      </Box>
   );
 };
 
