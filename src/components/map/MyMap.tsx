@@ -157,9 +157,9 @@ const MyMap = () => {
     <div>
       {isSuccess ? (
         <MapContainer
-          style={{ height: "70vh", width: "70vw" }}
-          zoom={2}
-          center={[25, 10]}
+          style={{ height: "50vh", width: "50vw" }}
+          zoom={1}
+          center={[35, 20]}
         >
           <GeoJSON
             data={mapData as GeoJsonObject}
@@ -167,8 +167,10 @@ const MyMap = () => {
             onEachFeature={onEachCountry}
             ref={geoJsonRef}
           />
-          <div style={{ position: "absolute", bottom: 0, zIndex: 1000 }}>
+          <div style={{ position: "absolute", top: 5, right: 5, zIndex: 1000 }}>
             <Legend />
+            </div>
+            <div style={{ position: "absolute", bottom: 0, zIndex: 1000 }}>
             {hoveredFeature ? (
               <MapInfoBox selectedFeature={hoveredFeature} />
             ) : (

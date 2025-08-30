@@ -33,9 +33,10 @@ const Home = () => {
             direction="row"
             alignItems="center"
             justifyContent="center"
+            spacing={1}
           >
             <MyMap />
-            <Box style={{ width: "20vh", height: "70vh", backgroundColor: "red" }}>
+            <Box style={{ width: "60vh", height: "50vh", backgroundColor: "red" }}>
               Speedometer
             </Box>
           </Grid>
