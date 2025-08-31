@@ -21,7 +21,31 @@ const Home = () => {
       <Toolbar />
       <Grid container direction="column" spacing={2}>
         <MapGauge />
-
+        <Card
+          sx={{
+            backgroundColor: "secondary.main",
+            border: 1,
+            borderColor: "border.main",
+            borderRadius: "0.6rem",
+            padding: "0.5rem",
+            width: "100%",
+          }}
+        >
+          <Grid
+            container
+            direction="row"
+            spacing={2}
+            sx={{
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <MyMap />
+            <Box sx={{ margin: "auto", }}>
+              <GaugeChart />
+            </Box>
+          </Grid>
+        </Card>
         <Grid container spacing={3}>
           <Grid size={{ xs: 12, md: 6 }}>
             <Typography variant="h4" sx={{ color: "text.main" }}>

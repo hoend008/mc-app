@@ -20,7 +20,7 @@ const getSampleCountryMap = async (
   });
 
   const mapData = createMapData(geodata, data);
-  return mapData;
+  return {data, mapData };
 };
 
 export default getSampleCountryMap;
