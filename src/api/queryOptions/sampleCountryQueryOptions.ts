@@ -1,14 +1,15 @@
 import { queryOptions } from "@tanstack/react-query";
 import getSampleCountry from "../queries/getSampleCountry";
-import { GeoJsonObject } from "geojson";
 
 export default function createSampleCountryQueryOptions(
   accessToken: string,
-  geodata: GeoJsonObject
+  country_code: string
 ) {
   return queryOptions({
-    queryKey: ["sampleyear"],
-    queryFn: () => getSampleCountry(accessToken, geodata),
+    queryKey: ["samplecountry", country_code],
+    queryFn: () => getSampleCountry(accessToken, country_code),
     staleTime: 2 * 60 * 1000, // 2 minutes
   });
 }
+
+

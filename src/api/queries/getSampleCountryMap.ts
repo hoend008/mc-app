@@ -1,19 +1,26 @@
 import axios from "axios";
+import createMapData from "../../hooks/useGeoDensityData";
+import { GeoJsonObject } from "geojson";
+import densityData from "../../data/testdata.json";
 
 export interface SampleCountry {
   [key: string]: string | number;
 }
 
-const getSampleCountry = async (accessToken: string, country_code: string) => {
+const getSampleCountryMap = async (
+  accessToken: string,
+  geodata: GeoJsonObject
+) => {
   const controller = new AbortController();
   const { data } = await axios<SampleCountry[]>({
     method: "get",
     url: "http://127.0.0.1:8000/samples/countries",
     signal: controller.signal,
     headers: { Authorization: "Bearer " + accessToken },
-    params: { iso_a3: country_code ? country_code : null },
   });
-  return data;
+
+  const mapData = createMapData(geodata, data);
+  return mapData;
 };
 
-export default getSampleCountry;
+export default getSampleCountryMap;

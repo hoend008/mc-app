@@ -10,6 +10,7 @@ import useData from "../hooks/useData";
 import useAuth from "../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import createCountriesQueryOptions from "../api/queryOptions/countryQueryOptions";
+import titleCase from "../utils/titleCase";
 
 const CountrySelect = () => {
   // get user authentication data
@@ -59,7 +60,7 @@ const CountrySelect = () => {
               value={country.code3}
               sx={{ color: "text.main", backgroundColor: "secondary.main" }}
             >
-              {country.country}
+              {titleCase(country.country)}
             </MenuItem>
           ))}
         </Select>

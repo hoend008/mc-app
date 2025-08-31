@@ -4,6 +4,7 @@ import BarchartYear from "../components/BarchartYear";
 import BarchartYearApex from "../components/BarchartYearApex";
 import MyMap from "../components/map/MyMap";
 import useData from "../hooks/useData";
+import GaugeChart from "../components/GaugeChart";
 
 const Home = () => {
   return (
@@ -37,7 +38,7 @@ const Home = () => {
           >
             <MyMap />
             <Box style={{ width: "60vh", height: "50vh", backgroundColor: "red" }}>
-              Speedometer
+              <GaugeChart />
             </Box>
           </Grid>
         </Card>

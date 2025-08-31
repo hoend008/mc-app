@@ -11,7 +11,7 @@ import Legend from "./Legend";
 import MapInfoBox from "./MapInfoBox";
 import useData from "../../hooks/useData";
 import { useQuery } from "@tanstack/react-query";
-import createSampleCountryQueryOptions from "../../api/queryOptions/sampleCountryQueryOptions";
+import createSampleCountryMapQueryOptions from "../../api/queryOptions/SampleCountryMapQueryOptions";
 import useAuth from "../../hooks/useAuth";
 import { CircularProgress, Typography } from "@mui/material";
 
@@ -33,7 +33,10 @@ const MyMap = () => {
     isPending,
     isSuccess,
   } = useQuery(
-    createSampleCountryQueryOptions(auth.accessToken, geodata as GeoJsonObject)
+    createSampleCountryMapQueryOptions(
+      auth.accessToken,
+      geodata as GeoJsonObject,
+    )
   );
 
   const [hoveredFeature, setHoveredFeature] = useState<any>(null);
@@ -169,8 +172,8 @@ const MyMap = () => {
           />
           <div style={{ position: "absolute", top: 5, right: 5, zIndex: 1000 }}>
             <Legend />
-            </div>
-            <div style={{ position: "absolute", bottom: 0, zIndex: 1000 }}>
+          </div>
+          <div style={{ position: "absolute", bottom: 0, zIndex: 1000 }}>
             {hoveredFeature ? (
               <MapInfoBox selectedFeature={hoveredFeature} />
             ) : (
