@@ -28,7 +28,6 @@ const MapGauge = () => {
     createSampleCountryMapQueryOptions(
       auth.accessToken,
       geodata as GeoJsonObject,
-      chartMainColor
     )
   );
 

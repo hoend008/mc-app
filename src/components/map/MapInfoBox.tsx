@@ -1,9 +1,31 @@
+import useTheme from "../../hooks/useTheme";
+import { themeSettings } from "../../themes/theme";
+import { chartMainColor } from "../MapGauge";
+
 interface Props {
   selectedFeature: any;
 }
 
 const MapInfoBox = ({ selectedFeature }: Props) => {
-  const opacity = selectedFeature.name ? 1 : 0;
+
+  const { mode, accentColor } = useTheme();
+  const chartMainColor = themeSettings(mode, accentColor).mapColors;
+  
+  const mapPolygonColorToDensity = (density: number, MAPCOLORS: chartMainColor[]) => {
+  return density > 10000 //0000000
+    ? MAPCOLORS[0].color
+    : density > 5000 //0000000
+    ? MAPCOLORS[1].color
+    : density > 2500 //0000000
+    ? MAPCOLORS[2].color
+    : density > 1000 //0000000
+    ? MAPCOLORS[3].color
+    : density > 500 //0000000
+    ? MAPCOLORS[4].color
+    : MAPCOLORS[5].color;
+};
+
+const opacity = selectedFeature.name ? 1 : 0;
 
   return (
     <div className={"MapInfoBox"}>
@@ -18,7 +40,7 @@ const MapInfoBox = ({ selectedFeature }: Props) => {
           style={{
             height: "2rem",
             width: "2rem",
-            backgroundColor: selectedFeature.color,
+            backgroundColor: mapPolygonColorToDensity(selectedFeature.density, chartMainColor),
             marginRight: "0.5rem",
             opacity: opacity,
           }}

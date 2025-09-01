@@ -30,7 +30,22 @@ const MyMap = ({
   isSuccess,
   chartMainColor,
 }: Props) => {
-  const { selectedFeature, setSelectedFeature, setCountryCode } = useData();
+
+const mapPolygonColorToDensity = (density: number, MAPCOLORS: chartMainColor[]) => {
+  return density > 10000 //0000000
+    ? MAPCOLORS[0].color
+    : density > 5000 //0000000
+    ? MAPCOLORS[1].color
+    : density > 2500 //0000000
+    ? MAPCOLORS[2].color
+    : density > 1000 //0000000
+    ? MAPCOLORS[3].color
+    : density > 500 //0000000
+    ? MAPCOLORS[4].color
+    : MAPCOLORS[5].color;
+};
+
+const { selectedFeature, setSelectedFeature, setCountryCode } = useData();
 
   const geoJsonRef = useRef(null);
 
@@ -83,7 +98,7 @@ const MyMap = ({
 
   const style = (feature: any) => {
     let mapStyle = {
-      fillColor: feature.properties?.color,
+      fillColor: mapPolygonColorToDensity(feature.properties?.density, chartMainColor),
       weight: 1,
       opacity: 1,
       color: "white",

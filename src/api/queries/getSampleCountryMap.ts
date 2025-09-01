@@ -16,7 +16,6 @@ export interface SampleCountry {
 const getSampleCountryMap = async (
   accessToken: string,
   geodata: GeoJsonObject,
-  MAPCOLORS: chartMainColor[],
 ) => {
   const controller = new AbortController();
   const { data } = await axios<SampleCountry[]>({
@@ -26,7 +25,7 @@ const getSampleCountryMap = async (
     headers: { Authorization: "Bearer " + accessToken },
   });
 
-  const mapData = createMapData(geodata, data, MAPCOLORS);
+  const mapData = createMapData(geodata, data);
   return {data, mapData };
 };
 
