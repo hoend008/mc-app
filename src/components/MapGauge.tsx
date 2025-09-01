@@ -6,21 +6,29 @@ import { GeoJsonObject } from "geojson";
 import useAuth from "../hooks/useAuth";
 import createSampleCountryMapQueryOptions from "../api/queryOptions/SampleCountryMapQueryOptions";
 import geodata from "../data/countries_WH.json";
+import useTheme from "../hooks/useTheme";
+import { themeSettings } from "../themes/theme";
+
+export interface chartMainColor {
+  color: string;
+  value: number;
+  range: string;
+  max: number;
+}
 
 const MapGauge = () => {
+  const { mode, accentColor } = useTheme();
+  const chartMainColor = themeSettings(mode, accentColor).mapColors;
+
   // get user authentication data
   const { auth } = useAuth();
 
   // get map density data
-  const {
-    data,
-    error,
-    isPending,
-    isSuccess,
-  } = useQuery(
+  const { data, error, isPending, isSuccess } = useQuery(
     createSampleCountryMapQueryOptions(
       auth.accessToken,
-      geodata as GeoJsonObject
+      geodata as GeoJsonObject,
+      chartMainColor
     )
   );
 
@@ -73,12 +81,16 @@ const MapGauge = () => {
           error={error}
           isPending={isPending}
           isSuccess={isSuccess}
+          chartMainColor={chartMainColor}
         />
         <Box sx={{ margin: "auto" }}>
-          <GaugeChart data={data.data}
-          error={error}
-          isPending={isPending}
-          isSuccess={isSuccess}/>
+          <GaugeChart
+            data={data.data}
+            error={error}
+            isPending={isPending}
+            isSuccess={isSuccess}
+            chartMainColor={chartMainColor}
+          />
         </Box>
       </Grid>
     </Card>

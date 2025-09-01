@@ -1,31 +1,36 @@
 import { Box, Typography } from "@mui/material";
 import { MAPCOLORS } from "./ColorUtils";
+import { chartMainColor } from "../MapGauge";
 
-const Legend = () => {
+interface Props {
+  chartMainColor: chartMainColor[];
+}
+
+const Legend = ({ chartMainColor }: Props) => {
   return (
-      <Box className={"LegendBox"}>
+    <Box className={"LegendBox"}>
       <Typography variant="h5">Legend</Typography>
-        {MAPCOLORS.map((c) => (
+      {chartMainColor.map((c) => (
+        <div
+          key={c.value}
+          style={{
+            display: "flex",
+            gap: 5,
+            alignItems: "center",
+          }}
+        >
           <div
             key={c.value}
             style={{
-              display: "flex",
-              gap: 5,
-              alignItems: "center",
+              width: "1rem",
+              height: "1rem",
+              backgroundColor: c.color,
             }}
-          >
-            <div
-              key={c.value}
-              style={{
-                width: "1rem",
-                height: "1rem",
-                backgroundColor: c.color,
-              }}
-            ></div>
-            <div style={{ fontSize: 14 }}>{c.range}</div>
-          </div>
-        ))}
-      </Box>
+          ></div>
+          <div style={{ fontSize: 14 }}>{c.range}</div>
+        </div>
+      ))}
+    </Box>
   );
 };
 

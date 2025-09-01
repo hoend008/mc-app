@@ -2,6 +2,7 @@ import axios from "axios";
 import createMapData from "../../hooks/useGeoDensityData";
 import { GeoJsonObject } from "geojson";
 import densityData from "../../data/testdata.json";
+import { chartMainColor } from "../../components/MapGauge";
 
 //export interface SampleCountry {
 //  [key: string]: string | number;
@@ -14,7 +15,8 @@ export interface SampleCountry {
 
 const getSampleCountryMap = async (
   accessToken: string,
-  geodata: GeoJsonObject
+  geodata: GeoJsonObject,
+  MAPCOLORS: chartMainColor[],
 ) => {
   const controller = new AbortController();
   const { data } = await axios<SampleCountry[]>({
@@ -24,7 +26,7 @@ const getSampleCountryMap = async (
     headers: { Authorization: "Bearer " + accessToken },
   });
 
-  const mapData = createMapData(geodata, data);
+  const mapData = createMapData(geodata, data, MAPCOLORS);
   return {data, mapData };
 };
 

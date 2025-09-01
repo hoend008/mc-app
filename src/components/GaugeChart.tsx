@@ -1,18 +1,28 @@
 import ReactSpeedometer, { Transition } from "react-d3-speedometer";
 import { Typography } from "@mui/material";
-import { GeoJsonObject } from "geojson";
-import { MAPCOLORS } from "./map/ColorUtils";
 import useData from "../hooks/useData";
 import { SampleCountry } from "../api/queries/getSampleCountryMap";
+import { chartMainColor } from "./MapGauge";
+import { useCallback, useEffect, useState } from "react";
+import useTheme from "../hooks/useTheme";
 
 interface Props {
   data: SampleCountry[];
   error: Error | null;
   isPending: boolean;
   isSuccess: boolean;
+  chartMainColor: chartMainColor[];
 }
 
-const GaugeChart = ({ data, error, isPending, isSuccess }: Props) => {
+const GaugeChart = ({
+  data,
+  error,
+  isPending,
+  isSuccess,
+  chartMainColor,
+}: Props) => {
+  const { mode, accentColor } = useTheme();
+
   // get country info
   const { countryCode } = useData();
 
@@ -55,14 +65,17 @@ const GaugeChart = ({ data, error, isPending, isSuccess }: Props) => {
       <ReactSpeedometer
         height={400}
         width={400}
-        customSegmentStops={MAPCOLORS.map((c) => c.max).reverse()}
-        segmentColors={MAPCOLORS.map((c) => c.color).reverse()}
+        customSegmentStops={chartMainColor.map((c) => c.max).reverse()}
+        segmentColors={chartMainColor.map((c) => c.color).reverse()}
         needleColor="steelblue"
         needleTransitionDuration={1000}
         needleTransition={Transition.easePolyInOut}
         value={getValue(countryCode)}
         minValue={0}
-        maxValue={MAPCOLORS.reduce((a, b) => Math.max(a, b.max), -Infinity)}
+        maxValue={chartMainColor.reduce(
+          (a, b) => Math.max(a, b.max),
+          -Infinity
+        )}
       />
     </div>
   );

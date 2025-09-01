@@ -1,6 +1,20 @@
-import { mapPolygonColorToDensity } from "../components/map/ColorUtils";
+import { chartMainColor } from "../components/MapGauge";
 
-const createMapData = (geodata: any, densityData: any) => {
+const mapPolygonColorToDensity = (density: number, MAPCOLORS: chartMainColor[]) => {
+  return density > 10000 //0000000
+    ? MAPCOLORS[0].color
+    : density > 5000 //0000000
+    ? MAPCOLORS[1].color
+    : density > 2500 //0000000
+    ? MAPCOLORS[2].color
+    : density > 1000 //0000000
+    ? MAPCOLORS[3].color
+    : density > 500 //0000000
+    ? MAPCOLORS[4].color
+    : MAPCOLORS[5].color;
+};
+
+const createMapData = (geodata: any, densityData: any, MAPCOLORS: chartMainColor[]) => {
   // loop over geodata.features
   for (const key in geodata.features) {
     // get code3 from geodata features
@@ -16,7 +30,8 @@ const createMapData = (geodata: any, densityData: any) => {
       geodata.features[key].properties.density =
         densityData[countryIndex].density;
       geodata.features[key].properties.color = mapPolygonColorToDensity(
-        densityData[countryIndex].density
+        densityData[countryIndex].density,
+        MAPCOLORS
       );
     } else {
       geodata.features[key].properties.density = null;

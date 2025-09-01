@@ -10,6 +10,7 @@ import Legend from "./Legend";
 import MapInfoBox from "./MapInfoBox";
 import useData from "../../hooks/useData";
 import { CircularProgress, Typography } from "@mui/material";
+import { chartMainColor } from "../MapGauge";
 
 const COLOR_SELECT = "yellow";
 const WEIGHT_SELECT = 2;
@@ -19,9 +20,16 @@ interface Props {
   error: Error | null;
   isPending: boolean;
   isSuccess: boolean;
+  chartMainColor: chartMainColor[];
 }
 
-const MyMap = ({ mapData, error, isPending, isSuccess }: Props) => {
+const MyMap = ({
+  mapData,
+  error,
+  isPending,
+  isSuccess,
+  chartMainColor,
+}: Props) => {
   const { selectedFeature, setSelectedFeature, setCountryCode } = useData();
 
   const geoJsonRef = useRef(null);
@@ -142,6 +150,7 @@ const MyMap = ({ mapData, error, isPending, isSuccess }: Props) => {
       </div>
     );
 
+  console.log(chartMainColor);
   return (
     <div>
       {isSuccess ? (
@@ -157,7 +166,7 @@ const MyMap = ({ mapData, error, isPending, isSuccess }: Props) => {
             ref={geoJsonRef}
           />
           <div style={{ position: "absolute", top: 5, right: 5, zIndex: 1000 }}>
-            <Legend />
+            <Legend chartMainColor={chartMainColor} />
           </div>
           <div style={{ position: "absolute", bottom: 0, zIndex: 1000 }}>
             {hoveredFeature ? (
