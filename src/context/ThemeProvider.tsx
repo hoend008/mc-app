@@ -1,4 +1,4 @@
-import { useMediaQuery } from "@mui/material";
+import { SelectChangeEvent, useMediaQuery } from "@mui/material";
 import {
   createContext,
   Dispatch,
@@ -12,6 +12,8 @@ interface ThemeContextType {
   setMode: Dispatch<SetStateAction<boolean>>;
   prefersDarkMode: boolean;
   handleChange: () => void;
+  accentColor: string;
+  handleAccentColor: (e: SelectChangeEvent) => void;
 }
 
 const ThemeContext = createContext({} as ThemeContextType);
@@ -34,13 +36,23 @@ export const ThemeProvider = ({ children }: Props) => {
     }
   };
 
+  const [accentColor, setAccentColor] = useState("green");
+
+  const handleAccentColor = (e: SelectChangeEvent) => {
+    console.log(e.target.value);
+    setAccentColor(e.target.value);
+  };
+
+
   return (
     <ThemeContext.Provider
       value={{
         mode,
         setMode,
         prefersDarkMode,
-        handleChange
+        handleChange,
+        accentColor,
+        handleAccentColor
       }}
     >
       {children}

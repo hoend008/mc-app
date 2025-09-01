@@ -1,12 +1,32 @@
 import ReactSpeedometer, { Transition } from "react-d3-speedometer";
+import { Typography } from "@mui/material";
+import { GeoJsonObject } from "geojson";
 import { MAPCOLORS } from "./map/ColorUtils";
-import useAuth from "../hooks/useAuth";
 import useData from "../hooks/useData";
-import createSampleCountryQueryOptions from "../api/queryOptions/sampleCountryQueryOptions";
-import { useQuery } from "@tanstack/react-query";
-import { CircularProgress, Typography } from "@mui/material";
+import { SampleCountry } from "../api/queries/getSampleCountryMap";
 
-const GaugeChart = () => {
+interface Props {
+  data: SampleCountry[];
+  error: Error | null;
+  isPending: boolean;
+  isSuccess: boolean;
+}
+
+const GaugeChart = ({ data, error, isPending, isSuccess }: Props) => {
+  // get country info
+  const { countryCode } = useData();
+
+  const getValue = (countryCode: string) => {
+    let resultValue: number = 0;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].iso_a3 === countryCode) {
+        resultValue = data[i].density;
+      }
+    }
+
+    return resultValue;
+  };
+
   // styles
   const defaultDiv = { height: "300px", width: "100%" };
   const extraDiv = {
@@ -14,17 +34,6 @@ const GaugeChart = () => {
     alignItems: "center",
     display: "flex",
   };
-
-  // get user authentication data
-  const { auth } = useAuth();
-
-  // get country info
-  const { countryCode } = useData();
-
-  // get sample year data
-  const { data, error, isPending } = useQuery(
-    createSampleCountryQueryOptions(auth.accessToken, countryCode)
-  );
 
   if (error)
     return (
@@ -51,7 +60,7 @@ const GaugeChart = () => {
         needleColor="steelblue"
         needleTransitionDuration={1000}
         needleTransition={Transition.easePolyInOut}
-        value={data ? (data[0].density as number) : 0}
+        value={getValue(countryCode)}
         minValue={0}
         maxValue={MAPCOLORS.reduce((a, b) => Math.max(a, b.max), -Infinity)}
       />

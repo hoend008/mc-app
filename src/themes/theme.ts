@@ -117,7 +117,7 @@ export const tokens = (mode: boolean) => ({
       }),
 });
 
-export const themeSettings = (mode: boolean) => {
+export const themeSettings = (mode: boolean, themeColor: string) => {
   const colors = tokens(mode);
   return mode
     ? {
@@ -129,7 +129,7 @@ export const themeSettings = (mode: boolean) => {
           //main: colors.greenAccent[300],
         },
         accent: {
-          green: "#5ea500",
+          main: themeColor == "green" ? "#5ea500" : "#fb6a4a",
         },
         neutral: {
           dark: colors.grey[200],
@@ -159,7 +159,7 @@ export const themeSettings = (mode: boolean) => {
           main: "#F2F3F4",
         },
         accent: {
-          green: "#5ea500",
+          main: themeColor == "green" ? "#5ea500" : "#fb6a4a",
         },
         neutral: {
           dark: colors.grey[400],

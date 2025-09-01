@@ -3,8 +3,13 @@ import createMapData from "../../hooks/useGeoDensityData";
 import { GeoJsonObject } from "geojson";
 import densityData from "../../data/testdata.json";
 
+//export interface SampleCountry {
+//  [key: string]: string | number;
+//}
+
 export interface SampleCountry {
-  [key: string]: string | number;
+  iso_a3: string;
+  density: number;
 }
 
 const getSampleCountryMap = async (

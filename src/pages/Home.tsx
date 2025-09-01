@@ -2,9 +2,6 @@ import { Box, Card, Grid, Toolbar, Typography } from "@mui/material";
 import { drawerWidth } from "../components/Layout";
 import BarchartYear from "../components/BarchartYear";
 import BarchartYearApex from "../components/BarchartYearApex";
-import MyMap from "../components/map/MyMap";
-import useData from "../hooks/useData";
-import GaugeChart from "../components/GaugeChart";
 import MapGauge from "../components/MapGauge";
 
 const Home = () => {

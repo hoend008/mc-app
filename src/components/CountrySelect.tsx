@@ -11,8 +11,13 @@ import useAuth from "../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import createCountriesQueryOptions from "../api/queryOptions/countryQueryOptions";
 import titleCase from "../utils/titleCase";
+import useTheme from "../hooks/useTheme";
+import { themeSettings } from "../themes/theme";
 
 const CountrySelect = () => {
+  const { mode, accentColor } = useTheme();
+  const chartMainColor = themeSettings(mode, accentColor);
+
   // get user authentication data
   const { auth } = useAuth();
 
@@ -41,11 +46,19 @@ const CountrySelect = () => {
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Country</InputLabel>
         <Select
+          MenuProps={{
+            sx: {
+              "&& .Mui-selected": {
+                color: "text.main",
+                background: chartMainColor.neutral.light,
+              },
+            },
+          }}
           sx={{
             color: "text.main",
             backgroundColor: "secondary.main",
             ".MuiOutlinedInput-notchedOutline": {
-              borderColor: "accent.green",
+              borderColor: chartMainColor.accent.main,
             },
           }}
           labelId="demo-simple-select-label"

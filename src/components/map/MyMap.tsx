@@ -2,7 +2,6 @@ import { MapContainer, GeoJSON } from "react-leaflet";
 import { GeoJsonObject } from "geojson";
 import { Feature } from "geojson";
 import { Layer } from "leaflet";
-import geodata from "../../data/countries_WH.json";
 import "leaflet/dist/leaflet.css";
 import "../../styles/MyMap.css";
 import { useEffect, useRef, useState } from "react";
@@ -10,34 +9,22 @@ import usePrevious from "react-use-previous";
 import Legend from "./Legend";
 import MapInfoBox from "./MapInfoBox";
 import useData from "../../hooks/useData";
-import { useQuery } from "@tanstack/react-query";
-import createSampleCountryMapQueryOptions from "../../api/queryOptions/SampleCountryMapQueryOptions";
-import useAuth from "../../hooks/useAuth";
 import { CircularProgress, Typography } from "@mui/material";
 
 const COLOR_SELECT = "yellow";
 const WEIGHT_SELECT = 2;
 
-const MyMap = () => {
+interface Props {
+  mapData: GeoJsonObject;
+  error: Error | null;
+  isPending: boolean;
+  isSuccess: boolean;
+}
+
+const MyMap = ({ mapData, error, isPending, isSuccess }: Props) => {
   const { selectedFeature, setSelectedFeature, setCountryCode } = useData();
 
   const geoJsonRef = useRef(null);
-
-  // get user authentication data
-  const { auth } = useAuth();
-
-  // get map density data
-  const {
-    data: mapData,
-    error,
-    isPending,
-    isSuccess,
-  } = useQuery(
-    createSampleCountryMapQueryOptions(
-      auth.accessToken,
-      geodata as GeoJsonObject,
-    )
-  );
 
   const [hoveredFeature, setHoveredFeature] = useState<any>(null);
   const previousFeature = usePrevious<any>(selectedFeature);
@@ -64,7 +51,6 @@ const MyMap = () => {
         setCountryCode(layer.feature.properties.iso_a3.toLowerCase());
       }
     } else {
-      console.log("resetting...");
       resetSelect();
       setCountryCode("");
     }

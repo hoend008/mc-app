@@ -16,8 +16,8 @@ const BarchartYearApex = () => {
     display: "flex",
   };
 
-  const { mode } = useTheme();
-  const chartMainColor = themeSettings(mode);
+  const { mode, accentColor } = useTheme();
+  const chartMainColor = themeSettings(mode, accentColor);
 
   // get user authentication data
   const { auth } = useAuth();
@@ -38,7 +38,7 @@ const BarchartYearApex = () => {
   ];
 
   const options = {
-    colors: [chartMainColor.accent.green],
+    colors: [chartMainColor.accent.main],
     xaxis: {
       categories: data ? data.map((x) => x.year as string) : [],
       labels: {

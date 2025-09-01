@@ -1,6 +1,6 @@
 import { Box, Card, CircularProgress, Grid, Typography } from "@mui/material";
-import MyMap2 from "./map/MyMap2";
-import GaugeChart2 from "./GaugeChart2";
+import MyMap from "./map/MyMap";
+import GaugeChart from "./GaugeChart";
 import { useQuery } from "@tanstack/react-query";
 import { GeoJsonObject } from "geojson";
 import useAuth from "../hooks/useAuth";
@@ -68,14 +68,14 @@ const MapGauge = () => {
           alignItems: "center",
         }}
       >
-        <MyMap2
+        <MyMap
           mapData={data.mapData}
           error={error}
           isPending={isPending}
           isSuccess={isSuccess}
         />
         <Box sx={{ margin: "auto" }}>
-          <GaugeChart2 data={data.data}
+          <GaugeChart data={data.data}
           error={error}
           isPending={isPending}
           isSuccess={isSuccess}/>

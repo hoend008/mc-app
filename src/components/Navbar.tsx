@@ -1,7 +1,11 @@
 import {
   AppBar,
   Box,
+  FormControl,
   IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -14,6 +18,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router";
 import AuthContext, { emptyAuth } from "../context/AuthProvider";
 import useTheme from "../hooks/useTheme";
+import { themeSettings } from "../themes/theme";
 
 interface Props {
   handleDrawerToggle: () => void;
@@ -21,8 +26,10 @@ interface Props {
 
 const Navbar = ({ handleDrawerToggle }: Props) => {
   const { setAuth } = useContext(AuthContext);
-  const { mode, handleChange } = useTheme();
+  const { mode, handleChange, accentColor, handleAccentColor } = useTheme();
   const navigate = useNavigate();
+
+  const chartMainColor = themeSettings(mode, accentColor);
 
   const logout = async () => {
     // if used in more components, this should be in context
@@ -68,6 +75,44 @@ const Navbar = ({ handleDrawerToggle }: Props) => {
               <DarkModeOutlinedIcon sx={{ color: "text.main" }} />
             )}
           </IconButton>
+          <FormControl fullWidth size="small">
+            <InputLabel id="them-select-label">Theme</InputLabel>
+            <Select
+              labelId="theme-select-label"
+              id="theme-select"
+              value={accentColor}
+              label="Theme"
+              onChange={handleAccentColor}
+              MenuProps={{
+                sx: {
+                  "&& .Mui-selected": {
+                    color: "text.main",
+                    background: chartMainColor.neutral.light,
+                  },
+                },
+              }}
+              sx={{
+                color: "text.main",
+                backgroundColor: "secondary.main",
+                ".MuiOutlinedInput-notchedOutline": {
+                  borderColor: chartMainColor.accent.main,
+                },
+              }}
+            >
+              <MenuItem
+                value={"green"}
+                sx={{ color: "text.main", backgroundColor: "secondary.main" }}
+              >
+                Green
+              </MenuItem>
+              <MenuItem
+                value={"red"}
+                sx={{ color: "text.main", backgroundColor: "secondary.main" }}
+              >
+                Red
+              </MenuItem>
+            </Select>
+          </FormControl>
           <IconButton onClick={logout}>
             <LogoutIcon sx={{ color: "text.main" }} />
           </IconButton>
