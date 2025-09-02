@@ -18,7 +18,7 @@ const BarchartYear = () => {
   };
 
   const { mode, accentColor } = useTheme();
-  const chartMainColor = themeSettings(mode, accentColor);
+  const themeColors = themeSettings(mode, accentColor);
 
   // get user authentication data
   const { auth } = useAuth();
@@ -57,7 +57,7 @@ const BarchartYear = () => {
           margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
           padding={0.4}
           valueScale={{ type: "linear" }}
-          colors={chartMainColor.accent.main}
+          colors={themeColors.accent.main}
           animate={true}
           enableLabel={false}
           axisTop={null}
@@ -69,7 +69,7 @@ const BarchartYear = () => {
           }}
           theme={{
             axis: {
-              ticks: { text: { fill: chartMainColor.text.main } },
+              ticks: { text: { fill: themeColors.text.main } },
             },
           }}
         />

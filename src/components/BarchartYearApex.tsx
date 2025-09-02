@@ -17,7 +17,7 @@ const BarchartYearApex = () => {
   };
 
   const { mode, accentColor } = useTheme();
-  const chartMainColor = themeSettings(mode, accentColor);
+  const themeColors = themeSettings(mode, accentColor);
 
   // get user authentication data
   const { auth } = useAuth();
@@ -38,19 +38,19 @@ const BarchartYearApex = () => {
   ];
 
   const options = {
-    colors: [chartMainColor.accent.main],
+    colors: [themeColors.accent.main],
     xaxis: {
       categories: data ? data.map((x) => x.year as string) : [],
       labels: {
         style: {
-          colors: Array(data?.length).fill(chartMainColor.text.main),
+          colors: Array(data?.length).fill(themeColors.text.main),
         },
       },
     },
     yaxis: {
       labels: {
         style: {
-          colors: Array(data?.length).fill(chartMainColor.text.main),
+          colors: Array(data?.length).fill(themeColors.text.main),
         },
       },
     },

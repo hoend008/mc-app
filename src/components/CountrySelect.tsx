@@ -16,7 +16,7 @@ import { themeSettings } from "../themes/theme";
 
 const CountrySelect = () => {
   const { mode, accentColor } = useTheme();
-  const chartMainColor = themeSettings(mode, accentColor);
+  const themeColors = themeSettings(mode, accentColor);
 
   // get user authentication data
   const { auth } = useAuth();
@@ -50,7 +50,7 @@ const CountrySelect = () => {
             sx: {
               "&& .Mui-selected": {
                 color: "text.main",
-                background: chartMainColor.neutral.light,
+                background: themeColors.neutral.light,
               },
             },
           }}
@@ -58,7 +58,7 @@ const CountrySelect = () => {
             color: "text.main",
             backgroundColor: "secondary.main",
             ".MuiOutlinedInput-notchedOutline": {
-              borderColor: chartMainColor.accent.main,
+              borderColor: themeColors.accent.main,
             },
           }}
           labelId="demo-simple-select-label"

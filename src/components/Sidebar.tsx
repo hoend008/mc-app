@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
-import CountrySelector from "./CountrySelector";
 import CountrySelect from "./CountrySelect";
 
 export const drawerWidth = 240;

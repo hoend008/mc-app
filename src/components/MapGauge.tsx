@@ -18,7 +18,7 @@ export interface chartMainColor {
 
 const MapGauge = () => {
   const { mode, accentColor } = useTheme();
-  const chartMainColor = themeSettings(mode, accentColor).mapColors;
+  const mapColors = themeSettings(mode, accentColor).mapColors;
 
   // get user authentication data
   const { auth } = useAuth();
@@ -80,7 +80,7 @@ const MapGauge = () => {
           error={error}
           isPending={isPending}
           isSuccess={isSuccess}
-          chartMainColor={chartMainColor}
+          mapColors={mapColors}
         />
         <Box sx={{ margin: "auto" }}>
           <GaugeChart
@@ -88,7 +88,7 @@ const MapGauge = () => {
             error={error}
             isPending={isPending}
             isSuccess={isSuccess}
-            chartMainColor={chartMainColor}
+            mapColors={mapColors}
           />
         </Box>
       </Grid>

@@ -29,7 +29,7 @@ const Navbar = ({ handleDrawerToggle }: Props) => {
   const { mode, handleChange, accentColor, handleAccentColor } = useTheme();
   const navigate = useNavigate();
 
-  const chartMainColor = themeSettings(mode, accentColor);
+  const themeColors = themeSettings(mode, accentColor);
 
   const logout = async () => {
     // if used in more components, this should be in context
@@ -87,7 +87,7 @@ const Navbar = ({ handleDrawerToggle }: Props) => {
                 sx: {
                   "&& .Mui-selected": {
                     color: "text.main",
-                    background: chartMainColor.neutral.light,
+                    background: themeColors.neutral.light,
                   },
                 },
               }}
@@ -95,7 +95,7 @@ const Navbar = ({ handleDrawerToggle }: Props) => {
                 color: "text.main",
                 backgroundColor: "secondary.main",
                 ".MuiOutlinedInput-notchedOutline": {
-                  borderColor: chartMainColor.accent.main,
+                  borderColor: themeColors.accent.main,
                 },
               }}
             >

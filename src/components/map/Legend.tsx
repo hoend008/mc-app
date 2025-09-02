@@ -3,14 +3,14 @@ import { MAPCOLORS } from "./ColorUtils";
 import { chartMainColor } from "../MapGauge";
 
 interface Props {
-  chartMainColor: chartMainColor[];
+  mapColors: chartMainColor[];
 }
 
-const Legend = ({ chartMainColor }: Props) => {
+const Legend = ({ mapColors }: Props) => {
   return (
     <Box className={"LegendBox"}>
       <Typography variant="h5">Legend</Typography>
-      {chartMainColor.map((c) => (
+      {mapColors.map((c) => (
         <div
           key={c.value}
           style={{

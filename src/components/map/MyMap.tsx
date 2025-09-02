@@ -11,6 +11,7 @@ import MapInfoBox from "./MapInfoBox";
 import useData from "../../hooks/useData";
 import { CircularProgress, Typography } from "@mui/material";
 import { chartMainColor } from "../MapGauge";
+import { mapPolygonColorToDensity } from "./ColorUtils";
 
 const COLOR_SELECT = "yellow";
 const WEIGHT_SELECT = 2;
@@ -20,7 +21,7 @@ interface Props {
   error: Error | null;
   isPending: boolean;
   isSuccess: boolean;
-  chartMainColor: chartMainColor[];
+  mapColors: chartMainColor[];
 }
 
 const MyMap = ({
@@ -28,22 +29,8 @@ const MyMap = ({
   error,
   isPending,
   isSuccess,
-  chartMainColor,
+  mapColors,
 }: Props) => {
-
-const mapPolygonColorToDensity = (density: number, MAPCOLORS: chartMainColor[]) => {
-  return density > 10000 //0000000
-    ? MAPCOLORS[0].color
-    : density > 5000 //0000000
-    ? MAPCOLORS[1].color
-    : density > 2500 //0000000
-    ? MAPCOLORS[2].color
-    : density > 1000 //0000000
-    ? MAPCOLORS[3].color
-    : density > 500 //0000000
-    ? MAPCOLORS[4].color
-    : MAPCOLORS[5].color;
-};
 
 const { selectedFeature, setSelectedFeature, setCountryCode } = useData();
 
@@ -98,7 +85,7 @@ const { selectedFeature, setSelectedFeature, setCountryCode } = useData();
 
   const style = (feature: any) => {
     let mapStyle = {
-      fillColor: mapPolygonColorToDensity(feature.properties?.density, chartMainColor),
+      fillColor: mapPolygonColorToDensity(feature.properties?.density, mapColors),
       weight: 1,
       opacity: 1,
       color: "white",
@@ -165,7 +152,6 @@ const { selectedFeature, setSelectedFeature, setCountryCode } = useData();
       </div>
     );
 
-  console.log(chartMainColor);
   return (
     <div>
       {isSuccess ? (
@@ -181,7 +167,7 @@ const { selectedFeature, setSelectedFeature, setCountryCode } = useData();
             ref={geoJsonRef}
           />
           <div style={{ position: "absolute", top: 5, right: 5, zIndex: 1000 }}>
-            <Legend chartMainColor={chartMainColor} />
+            <Legend mapColors={mapColors} />
           </div>
           <div style={{ position: "absolute", bottom: 0, zIndex: 1000 }}>
             {hoveredFeature ? (

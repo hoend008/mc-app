@@ -5,13 +5,14 @@ import { SampleCountry } from "../api/queries/getSampleCountryMap";
 import { chartMainColor } from "./MapGauge";
 import { useCallback, useEffect, useState } from "react";
 import useTheme from "../hooks/useTheme";
+import { themeSettings } from "../themes/theme";
 
 interface Props {
   data: SampleCountry[];
   error: Error | null;
   isPending: boolean;
   isSuccess: boolean;
-  chartMainColor: chartMainColor[];
+  mapColors: chartMainColor[];
 }
 
 const GaugeChart = ({
@@ -19,9 +20,10 @@ const GaugeChart = ({
   error,
   isPending,
   isSuccess,
-  chartMainColor,
+  mapColors,
 }: Props) => {
   const { mode, accentColor } = useTheme();
+  const themeColors = themeSettings(mode, accentColor);
 
   // get country info
   const { countryCode } = useData();
@@ -65,17 +67,19 @@ const GaugeChart = ({
       <ReactSpeedometer
         height={400}
         width={400}
-        customSegmentStops={chartMainColor.map((c) => c.max).reverse()}
-        segmentColors={chartMainColor.map((c) => c.color).reverse()}
+        customSegmentStops={mapColors.map((c) => c.max).reverse()}
+        segmentColors={mapColors.map((c) => c.color).reverse()}
         needleColor="steelblue"
         needleTransitionDuration={1000}
         needleTransition={Transition.easePolyInOut}
         value={getValue(countryCode)}
         minValue={0}
-        maxValue={chartMainColor.reduce(
-          (a, b) => Math.max(a, b.max),
-          -Infinity
-        )}
+        maxValue={mapColors.reduce((a, b) => Math.max(a, b.max), -Infinity)}
+        textColor={themeColors.text.main}
+        labelFontSize={"14px"}
+        valueTextFontSize={"32px"}
+        forceRender={true}
+        paddingVertical={20}
       />
     </div>
   );
