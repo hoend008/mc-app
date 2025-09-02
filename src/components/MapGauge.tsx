@@ -27,7 +27,7 @@ const MapGauge = () => {
   const { data, error, isPending, isSuccess } = useQuery(
     createSampleCountryMapQueryOptions(
       auth.accessToken,
-      geodata as GeoJsonObject,
+      geodata as GeoJsonObject
     )
   );
 

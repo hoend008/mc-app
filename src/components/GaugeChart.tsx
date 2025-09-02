@@ -61,11 +61,11 @@ const GaugeChart = ({
       style={{
         ...defaultDiv,
         ...extraDiv,
-        paddingTop: "10rem",
+        paddingTop: "3rem"
       }}
     >
       <ReactSpeedometer
-        height={400}
+        height={300}
         width={400}
         customSegmentStops={mapColors.map((c) => c.max).reverse()}
         segmentColors={mapColors.map((c) => c.color).reverse()}
