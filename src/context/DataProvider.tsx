@@ -7,12 +7,13 @@ import {
   useState,
 } from "react";
 
-
 interface DataContextType {
   countryCode: string;
   setCountryCode: Dispatch<SetStateAction<string>>;
   selectedFeature: any;
   setSelectedFeature: Dispatch<any>;
+  feedconversionID: number;
+  setFeedconversionID: Dispatch<SetStateAction<number>>;
   //selectedData: SampleYear;
   //setSelectedData: Dispatch<SetStateAction<SampleYear>>;
 }
@@ -26,6 +27,8 @@ interface Props {
 export const DataProvider = ({ children }: Props) => {
   // set state variable that holds country and function to update country
   const [countryCode, setCountryCode] = useState("");
+
+  const [feedconversionID, setFeedconversionID] = useState(0);
 
   //const [selectedData, setSelectedData] = useState({});
 
@@ -43,6 +46,8 @@ export const DataProvider = ({ children }: Props) => {
         setCountryCode,
         selectedFeature,
         setSelectedFeature,
+        feedconversionID,
+        setFeedconversionID,
         //selectedData,
         //setSelectedData
       }}

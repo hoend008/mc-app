@@ -2,12 +2,12 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import useAuth from "../hooks/useAuth";
 import useData from "../hooks/useData";
 import { useQuery } from "@tanstack/react-query";
-import createSampleYearQueryOptions from "../api/queryOptions/sampleYearQueryOptions";
 import { CircularProgress, Typography } from "@mui/material";
 import useTheme from "../hooks/useTheme";
 import { themeSettings } from "../themes/theme";
 import { useState } from "react";
 import usePrevious from "react-use-previous";
+import createSampleProductQueryOptions from "../api/queryOptions/sampleProductQueryOptions";
 
 const data01 = [
   { name: "Group A", value: 400 },
@@ -19,6 +19,9 @@ const data01 = [
 ];
 
 const PiechartRecharts = () => {
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const previousIndex = usePrevious(activeIndex);
+
   // styles
   const defaultDiv = { height: "300px", width: "100%" };
   const extraDiv = {
@@ -31,11 +34,11 @@ const PiechartRecharts = () => {
   const { auth } = useAuth();
 
   // get country info
-  const { countryCode } = useData();
+  const { countryCode, setFeedconversionID } = useData();
 
   // get sample year data
   const { data, error, isPending } = useQuery(
-    createSampleYearQueryOptions(auth.accessToken, countryCode)
+    createSampleProductQueryOptions(auth.accessToken, countryCode)
   );
 
   const { mode, accentColor } = useTheme();
@@ -61,15 +64,13 @@ const PiechartRecharts = () => {
     return entry.name;
   };
 
-  const [activeIndex, setActiveIndex] = useState(-1);
-  const previousIndex = usePrevious(activeIndex);
-
   const handleClick = (data: any, index: any) => {
-    console.log(data.year);
     if (index === previousIndex.current) {
       setActiveIndex(-1);
+      setFeedconversionID(0);
     } else {
       setActiveIndex(index);
+      setFeedconversionID(data.feedconversion_id);
     }
   };
 
@@ -78,7 +79,7 @@ const PiechartRecharts = () => {
       <PieChart width={400} height={400}>
         <Pie
           dataKey="count"
-          nameKey="year"
+          nameKey="productname"
           isAnimationActive={false}
           data={data}
           cx="50%"
@@ -90,6 +91,7 @@ const PiechartRecharts = () => {
         >
           {data.map((entry, index) => (
             <Cell
+              style={{ outline: "none" }}
               cursor="pointer"
               fill={index === activeIndex ? "#82ca9d" : themeColors.accent.main}
               key={`cell-${index}`}

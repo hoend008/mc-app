@@ -1,27 +1,25 @@
 import axios from "axios";
 
-export interface SampleYear {
+export interface SampleProduct {
   [key: string]: string | number;
 }
 
-const getSampleYear = async (
+const getSampleProduct = async (
   accessToken: string,
   country_code: string,
-  feedconversionID: number,
 ) => {
   const controller = new AbortController();
-  const { data } = await axios<SampleYear[]>({
+  const { data } = await axios<SampleProduct[]>({
     method: "get",
-    url: "http://127.0.0.1:8000/samples/years",
+    url: "http://127.0.0.1:8000/samples/products",
     signal: controller.signal,
     headers: { Authorization: "Bearer " + accessToken },
     params: {
       iso_a3: country_code ? country_code : null,
-      feedconversion_id: feedconversionID
     },
   });
 
   return data;
 };
 
-export default getSampleYear;
+export default getSampleProduct;

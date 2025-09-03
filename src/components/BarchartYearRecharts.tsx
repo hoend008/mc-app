@@ -31,11 +31,15 @@ const BarchartYearRecharts = () => {
   const { auth } = useAuth();
 
   // get country info
-  const { countryCode } = useData();
+  const { countryCode, feedconversionID } = useData();
 
   // get sample year data
   const { data, error, isPending } = useQuery(
-    createSampleYearQueryOptions(auth.accessToken, countryCode)
+    createSampleYearQueryOptions(
+      auth.accessToken,
+      countryCode,
+      feedconversionID
+    )
   );
 
   const { mode, accentColor } = useTheme();
@@ -84,14 +88,19 @@ const BarchartYearRecharts = () => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="year" tick={{fontSize: 12, fill: themeColors.text.main}}/>
-          <YAxis tick={{fontSize: 12, fill: themeColors.text.main}}/>
+          <XAxis
+            dataKey="year"
+            tick={{ fontSize: 12, fill: themeColors.text.main }}
+          />
+          <YAxis tick={{ fontSize: 12, fill: themeColors.text.main }} />
           <Tooltip />
           <Bar dataKey="count" onClick={handleClick}>
             {data.map((entry, index) => (
               <Cell
                 cursor="pointer"
-                fill={index === activeIndex ? "#82ca9d" : themeColors.accent.main}
+                fill={
+                  index === activeIndex ? "#82ca9d" : themeColors.accent.main
+                }
                 key={`cell-${index}`}
               />
             ))}
