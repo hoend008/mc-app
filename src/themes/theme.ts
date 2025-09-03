@@ -120,18 +120,60 @@ export const tokens = (mode: boolean) => ({
 export const themeSettings = (mode: boolean, themeColor: string) => {
   const colors = tokens(mode);
 
-  const greenGradient = ["#5EA500", "#6AB61E", "#75C73D", "#81D95B", "#8CEA7A", "#98FB98"]
-  const redGradient = ["#a50f15", "#de2d26", "#fb6a4a", "#fc9272", "#fcbba1", "#fee5d9"]
-  const colorGradient = themeColor === "green" ? greenGradient : redGradient
-  
+  const greenGradient = [
+    "#5EA500",
+    "#6AB61E",
+    "#75C73D",
+    "#81D95B",
+    "#8CEA7A",
+    "#98FB98",
+  ];
+  const redGradient = [
+    "#a50f15",
+    "#de2d26",
+    "#fb6a4a",
+    "#fc9272",
+    "#fcbba1",
+    "#fee5d9",
+  ];
+  const colorGradient = themeColor === "green" ? greenGradient : redGradient;
+
   const MAPCOLORS = [
-  { color: colorGradient[0], value: 10000, range: "> 10,000", max: 10000 },
-  { color: colorGradient[1], value: 5000, range: "5,000 - 10,000", max: 5000 },
-  { color: colorGradient[2], value: 2500, range: "2,500 - 5,000", max: 2500 },
-  { color: colorGradient[3], value: 1000, range: "1,000 - 2,500", max: 1000 },
-  { color: colorGradient[4], value: 500, range: "500 - 1,000", max: 500 },
-  { color: colorGradient[5], value: 0, range: "0 - 500", max: 0 },
-];
+    { color: colorGradient[0], value: 10000, range: "> 10,000", max: 10000 },
+    {
+      color: colorGradient[1],
+      value: 5000,
+      range: "5,000 - 10,000",
+      max: 5000,
+    },
+    { color: colorGradient[2], value: 2500, range: "2,500 - 5,000", max: 2500 },
+    { color: colorGradient[3], value: 1000, range: "1,000 - 2,500", max: 1000 },
+    { color: colorGradient[4], value: 500, range: "500 - 1,000", max: 500 },
+    { color: colorGradient[5], value: 0, range: "0 - 500", max: 0 },
+  ];
+
+  const MAPCOLORS_GREEN = [
+    { color: greenGradient[0], value: 10000, range: "> 10,000", max: 10000 },
+    {
+      color: greenGradient[1],
+      value: 5000,
+      range: "5,000 - 10,000",
+      max: 5000,
+    },
+    { color: greenGradient[2], value: 2500, range: "2,500 - 5,000", max: 2500 },
+    { color: greenGradient[3], value: 1000, range: "1,000 - 2,500", max: 1000 },
+    { color: greenGradient[4], value: 500, range: "500 - 1,000", max: 500 },
+    { color: greenGradient[5], value: 0, range: "0 - 500", max: 0 },
+  ];
+
+  const MAPCOLORS_RED = [
+    { color: redGradient[0], value: 10000, range: "> 10,000", max: 10000 },
+    { color: redGradient[1], value: 5000, range: "5,000 - 10,000", max: 5000 },
+    { color: redGradient[2], value: 2500, range: "2,500 - 5,000", max: 2500 },
+    { color: redGradient[3], value: 1000, range: "1,000 - 2,500", max: 1000 },
+    { color: redGradient[4], value: 500, range: "500 - 1,000", max: 500 },
+    { color: redGradient[5], value: 0, range: "0 - 500", max: 0 },
+  ];
 
   return mode
     ? {
@@ -162,7 +204,9 @@ export const themeSettings = (mode: boolean, themeColor: string) => {
         border: {
           main: "#ffffff1a",
         },
-        mapColors: MAPCOLORS
+        mapColors: MAPCOLORS,
+        mapColorsGreen: MAPCOLORS_GREEN,
+        mapColorsRed: MAPCOLORS_RED,
       }
     : {
         primary: {
@@ -192,6 +236,8 @@ export const themeSettings = (mode: boolean, themeColor: string) => {
         border: {
           main: "#e5e5e5",
         },
-        mapColors: MAPCOLORS
+        mapColors: MAPCOLORS,
+        mapColorsGreen: MAPCOLORS_GREEN,
+        mapColorsRed: MAPCOLORS_RED,
       };
 };

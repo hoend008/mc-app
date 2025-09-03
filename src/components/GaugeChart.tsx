@@ -3,7 +3,7 @@ import { Typography } from "@mui/material";
 import useData from "../hooks/useData";
 import { SampleCountry } from "../api/queries/getSampleCountryMap";
 import { chartMainColor } from "./MapGauge";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useReducer, useState } from "react";
 import useTheme from "../hooks/useTheme";
 import { themeSettings } from "../themes/theme";
 
@@ -61,26 +61,28 @@ const GaugeChart = ({
       style={{
         ...defaultDiv,
         ...extraDiv,
-        paddingTop: "3rem"
+        paddingTop: "3rem",
       }}
     >
-      <ReactSpeedometer
-        height={300}
-        width={400}
-        customSegmentStops={mapColors.map((c) => c.max).reverse()}
-        segmentColors={mapColors.map((c) => c.color).reverse()}
-        needleColor="steelblue"
-        needleTransitionDuration={1000}
-        needleTransition={Transition.easePolyInOut}
-        value={getValue(countryCode)}
-        minValue={0}
-        maxValue={mapColors.reduce((a, b) => Math.max(a, b.max), -Infinity)}
-        textColor={themeColors.text.main}
-        labelFontSize={"14px"}
-        valueTextFontSize={"32px"}
-        forceRender={true}
-        paddingVertical={20}
-      />
+      {
+        <ReactSpeedometer
+          height={300}
+          width={400}
+          customSegmentStops={mapColors.map((c) => c.max).reverse()}
+          segmentColors={mapColors.map((c) => c.color).reverse()}
+          needleColor="steelblue"
+          needleTransitionDuration={1000}
+          needleTransition={Transition.easePolyInOut}
+          value={getValue(countryCode)}
+          minValue={0}
+          maxValue={mapColors.reduce((a, b) => Math.max(a, b.max), -Infinity)}
+          textColor={themeColors.text.main}
+          labelFontSize={"14px"}
+          valueTextFontSize={"32px"}
+          forceRender={true}
+          paddingVertical={20}
+        />
+      }
     </div>
   );
 };
