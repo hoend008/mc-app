@@ -30,7 +30,7 @@ const MapInfoBox = ({ selectedFeature }: Props) => {
               selectedFeature.density,
               chartMainColor
             ),
-            marginRight: "0.5rem",
+            marginRight: "0.4rem",
             opacity: opacity,
           }}
         />
@@ -39,15 +39,16 @@ const MapInfoBox = ({ selectedFeature }: Props) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            width: "8.5rem",
+            width: "11rem",
           }}
         >
-          <div style={{ fontSize: 14 }}>
+          <div style={{ fontSize: 14, maxWidth: "3rem" }}>
             {selectedFeature.name ? selectedFeature.name : "Hover for score"}
           </div>
           {selectedFeature.name ? (
             <div
               style={{
+                marginLeft: "1rem",
                 display: "flex",
                 width: "5rem",
                 height: "5rem",

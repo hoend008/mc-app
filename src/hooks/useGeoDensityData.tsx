@@ -1,4 +1,3 @@
-import { chartMainColor } from "../components/MapGauge";
 
 const createMapData = (geodata: any, densityData: any) => {
   // loop over geodata.features

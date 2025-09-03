@@ -8,6 +8,7 @@ import createSampleYearQueryOptions from "../api/queryOptions/sampleYearQueryOpt
 import useTheme from "../hooks/useTheme";
 import { themeSettings } from "../themes/theme";
 
+
 const BarchartYear = () => {
   // styles
   const defaultDiv = { height: "300px", width: "100%" };
@@ -71,6 +72,9 @@ const BarchartYear = () => {
             axis: {
               ticks: { text: { fill: themeColors.text.main } },
             },
+          }}
+          onClick={(data) => {
+            //setSelectedData(data.data);
           }}
         />
       ) : null}

@@ -2,7 +2,8 @@ import axios, { CanceledError } from "axios";
 import { useEffect, useState } from "react";
 
 export interface SampleYear {
-  [key: string]: string | number;
+  count: number;
+  year: number;
 }
 
 const useSampleCountry = (accessToken: string) => {

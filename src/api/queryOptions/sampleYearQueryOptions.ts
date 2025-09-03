@@ -3,7 +3,7 @@ import getSampleYear from "../queries/getSampleYear";
 
 export default function createSampleYearQueryOptions(
   accessToken: string,
-  countryID: string
+  countryID: string,
 ) {
   return queryOptions({
     queryKey: ["sampleyear", countryID],

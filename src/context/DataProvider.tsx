@@ -7,11 +7,14 @@ import {
   useState,
 } from "react";
 
+
 interface DataContextType {
   countryCode: string;
   setCountryCode: Dispatch<SetStateAction<string>>;
   selectedFeature: any;
   setSelectedFeature: Dispatch<any>;
+  //selectedData: SampleYear;
+  //setSelectedData: Dispatch<SetStateAction<SampleYear>>;
 }
 
 const DataContext = createContext({} as DataContextType);
@@ -23,6 +26,8 @@ interface Props {
 export const DataProvider = ({ children }: Props) => {
   // set state variable that holds country and function to update country
   const [countryCode, setCountryCode] = useState("");
+
+  //const [selectedData, setSelectedData] = useState({});
 
   // theming
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -38,6 +43,8 @@ export const DataProvider = ({ children }: Props) => {
         setCountryCode,
         selectedFeature,
         setSelectedFeature,
+        //selectedData,
+        //setSelectedData
       }}
     >
       {children}
