@@ -4,6 +4,7 @@ import BarchartYear from "../components/BarchartYear";
 import BarchartYearApex from "../components/BarchartYearApex";
 import MapGauge from "../components/MapGauge";
 import BarchartYearRecharts from "../components/BarchartYearRecharts";
+import PiechartRecharts from "../components/PIechartRecharts";
 
 const Home = () => {
   return (
@@ -75,6 +76,24 @@ const Home = () => {
               }}
             >
               <BarchartYearRecharts />
+            </Card>
+          </Grid>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Typography variant="h4" sx={{ color: "text.main" }}>
+              Piechart ReCharts
+            </Typography>
+            <Typography sx={{ color: "text.secondary" }}>
+              Some text on the graph here
+            </Typography>
+            <Card
+              sx={{
+                backgroundColor: "secondary.main",
+                border: 1,
+                borderColor: "border.main",
+                borderRadius: "0.6rem",
+              }}
+            >
+              <PiechartRecharts />
             </Card>
           </Grid>
           

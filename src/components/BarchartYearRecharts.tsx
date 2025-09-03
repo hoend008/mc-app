@@ -1,57 +1,51 @@
 import { useState } from "react";
 import usePrevious from "react-use-previous";
-import { BarChart, Bar, Cell, ResponsiveContainer } from "recharts";
+import {
+  BarChart,
+  Bar,
+  Cell,
+  ResponsiveContainer,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+} from "recharts";
+import useAuth from "../hooks/useAuth";
+import useData from "../hooks/useData";
+import { useQuery } from "@tanstack/react-query";
+import createSampleYearQueryOptions from "../api/queryOptions/sampleYearQueryOptions";
+import { CircularProgress, Typography } from "@mui/material";
+import useTheme from "../hooks/useTheme";
+import { themeSettings } from "../themes/theme";
 
 const BarchartYearRecharts = () => {
-  const [data] = useState([
-    {
-      name: "Page A",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: "Page G",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ]);
+  // styles
+  const defaultDiv = { height: "300px", width: "100%" };
+  const extraDiv = {
+    justifyContent: "center",
+    alignItems: "center",
+    display: "flex",
+  };
+
+  // get user authentication data
+  const { auth } = useAuth();
+
+  // get country info
+  const { countryCode } = useData();
+
+  // get sample year data
+  const { data, error, isPending } = useQuery(
+    createSampleYearQueryOptions(auth.accessToken, countryCode)
+  );
+
+  const { mode, accentColor } = useTheme();
+  const themeColors = themeSettings(mode, accentColor);
+
   const [activeIndex, setActiveIndex] = useState(-1);
   const previousIndex = usePrevious(activeIndex);
 
   const handleClick = (data: any, index: any) => {
-    console.log(data.name);
+    console.log(data.year);
     if (index === previousIndex.current) {
       setActiveIndex(-1);
     } else {
@@ -59,18 +53,45 @@ const BarchartYearRecharts = () => {
     }
   };
 
-  const activeItem = data[activeIndex];
+  if (error)
+    return (
+      <div style={{ ...defaultDiv, ...extraDiv }}>
+        <Typography variant="h6" color="warning">
+          Oops, something went wrong
+        </Typography>
+      </div>
+    );
+
+  if (isPending)
+    return (
+      <div style={{ ...defaultDiv, ...extraDiv }}>
+        <CircularProgress color="success" size="5rem" />
+      </div>
+    );
 
   return (
     <div style={{ width: "100%" }}>
-      <p>Click each rectangle </p>
-      <ResponsiveContainer width="100%" height={100}>
-        <BarChart width={150} height={40} data={data}>
-          <Bar dataKey="uv" onClick={handleClick}>
+      <ResponsiveContainer width="100%" height={300}>
+        <BarChart
+          width={150}
+          height={40}
+          data={data}
+          margin={{
+            top: 25,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="year" tick={{fontSize: 12, fill: themeColors.text.main}}/>
+          <YAxis tick={{fontSize: 12, fill: themeColors.text.main}}/>
+          <Tooltip />
+          <Bar dataKey="count" onClick={handleClick}>
             {data.map((entry, index) => (
               <Cell
                 cursor="pointer"
-                fill={index === activeIndex ? "#82ca9d" : "#8884d8"}
+                fill={index === activeIndex ? "#82ca9d" : themeColors.accent.main}
                 key={`cell-${index}`}
               />
             ))}
