@@ -14,10 +14,6 @@ const createMapData = (geodata: any, densityData: any) => {
     if (countryIndex > 0) {
       geodata.features[key].properties.density =
         densityData[countryIndex].density;
-      //geodata.features[key].properties.color = mapPolygonColorToDensity(
-      //  densityData[countryIndex].density,
-      //  MAPCOLORS
-      //);
     } else {
       geodata.features[key].properties.density = null;
     }

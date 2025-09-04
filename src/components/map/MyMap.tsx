@@ -26,9 +26,8 @@ interface Props {
 }
 
 const MyMap = ({ mapData, error, isPending, isSuccess, mapColors }: Props) => {
-
   const { countryCode, setCountryCode } = useData();
-  
+
   const geoJsonRef = useRef(null);
 
   const [hoveredFeature, setHoveredFeature] = useState<any>(null);
@@ -113,7 +112,7 @@ const MyMap = ({ mapData, error, isPending, isSuccess, mapColors }: Props) => {
         .getLayers()
         .find(
           (layer: any) =>
-          layer.feature.properties.iso_a3.toLowerCase() === countryCode
+            layer.feature.properties.iso_a3.toLowerCase() === countryCode
         );
       let mapStyle = {
         fillColor: COLOR_SELECT,

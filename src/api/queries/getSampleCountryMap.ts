@@ -1,8 +1,6 @@
 import axios from "axios";
-import createMapData from "../../hooks/useGeoDensityData";
 import { GeoJsonObject } from "geojson";
-import densityData from "../../data/testdata.json";
-import { chartMainColor } from "../../components/MapGauge";
+import createMapData from "../../hooks/useGeoDensityData";
 
 //export interface SampleCountry {
 //  [key: string]: string | number;

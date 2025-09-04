@@ -13,7 +13,8 @@ export const mapPolygonColorToDensity = (
   density: number,
   MAPCOLORS: chartMainColor[]
 ) => {
-  return density > 10000 //0000000
+  return density == null ? "#808080" :
+    density > 10000 //0000000
     ? MAPCOLORS[0].color
     : density > 5000 //0000000
     ? MAPCOLORS[1].color
