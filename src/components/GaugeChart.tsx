@@ -72,7 +72,7 @@ const GaugeChart = ({
           textColor={themeColors.text.main}
           labelFontSize={"14px"}
           valueTextFontSize={"32px"}
-          forceRender={true}
+          forceRender={false}
           paddingVertical={20}
         />
       }
