@@ -38,7 +38,7 @@ const Sidebar = ({
       <CountrySelect />
       <Divider />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
+        {["Button 1", "Button 2", "Button 3"].map((text, index) => (
           <ListItem key={text} disablePadding sx={{ color: "text.main" }}>
             <ListItemButton>
               <ListItemIcon sx={{ color: "text.main" }}>

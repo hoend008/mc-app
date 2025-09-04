@@ -17,16 +17,9 @@ import createSampleYearQueryOptions from "../api/queryOptions/sampleYearQueryOpt
 import { CircularProgress, Typography } from "@mui/material";
 import useTheme from "../hooks/useTheme";
 import { themeSettings } from "../themes/theme";
+import { defaultDiv, extraDiv } from "../styles/pendingErrorDiv";
 
 const BarchartYearRecharts = () => {
-  // styles
-  const defaultDiv = { height: "300px", width: "100%" };
-  const extraDiv = {
-    justifyContent: "center",
-    alignItems: "center",
-    display: "flex",
-  };
-
   // get user authentication data
   const { auth } = useAuth();
 

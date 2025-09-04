@@ -6,16 +6,9 @@ import Chart from "react-apexcharts";
 import { CircularProgress, Typography } from "@mui/material";
 import { themeSettings } from "../themes/theme";
 import useTheme from "../hooks/useTheme";
+import { defaultDiv, extraDiv } from "../styles/pendingErrorDiv";
 
 const BarchartYearApex = () => {
-  // styles
-  const defaultDiv = { height: "300px", width: "100%" };
-  const extraDiv = {
-    justifyContent: "center",
-    alignItems: "center",
-    display: "flex",
-  };
-
   const { mode, accentColor } = useTheme();
   const themeColors = themeSettings(mode, accentColor);
 
@@ -27,7 +20,7 @@ const BarchartYearApex = () => {
 
   // get sample year data
   const { data, error, isPending } = useQuery(
-    createSampleYearQueryOptions(auth.accessToken, countryCode)
+    createSampleYearQueryOptions(auth.accessToken, countryCode, 0)
   );
 
   const series = [

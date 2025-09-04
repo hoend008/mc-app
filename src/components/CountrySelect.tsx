@@ -26,15 +26,13 @@ const CountrySelect = () => {
     createCountriesQueryOptions(auth.accessToken)
   );
 
-  const { selectedFeature, setSelectedFeature, setCountryCode } = useData();
+  const { countryCode, setCountryCode } = useData();
 
   const handleDistrictChange = (e: SelectChangeEvent) => {
     const iso_a3 = e.target.value;
     //const countryProps = densityData.find((e) => e.iso_a3 === iso_a3);
     //if (countryProps) {
     if (iso_a3) {
-      //setSelectedFeature(countryProps);
-      setSelectedFeature(iso_a3);
       setCountryCode(iso_a3);
     } else {
       return;
@@ -63,7 +61,7 @@ const CountrySelect = () => {
           }}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={selectedFeature ? selectedFeature : ""}
+          value={countryCode ? countryCode : ""}
           label="Countries"
           onChange={handleDistrictChange}
         >

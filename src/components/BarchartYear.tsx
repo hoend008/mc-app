@@ -7,17 +7,9 @@ import { useQuery } from "@tanstack/react-query";
 import createSampleYearQueryOptions from "../api/queryOptions/sampleYearQueryOptions";
 import useTheme from "../hooks/useTheme";
 import { themeSettings } from "../themes/theme";
-
+import { defaultDiv, extraDiv } from "../styles/pendingErrorDiv";
 
 const BarchartYear = () => {
-  // styles
-  const defaultDiv = { height: "300px", width: "100%" };
-  const extraDiv = {
-    justifyContent: "center",
-    alignItems: "center",
-    display: "flex",
-  };
-
   const { mode, accentColor } = useTheme();
   const themeColors = themeSettings(mode, accentColor);
 
@@ -29,7 +21,7 @@ const BarchartYear = () => {
 
   // get sample year data
   const { data, error, isPending } = useQuery(
-    createSampleYearQueryOptions(auth.accessToken, countryCode)
+    createSampleYearQueryOptions(auth.accessToken, countryCode, 0)
   );
 
   if (error)

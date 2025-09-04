@@ -6,6 +6,7 @@ import { chartMainColor } from "./MapGauge";
 import { useCallback, useEffect, useReducer, useState } from "react";
 import useTheme from "../hooks/useTheme";
 import { themeSettings } from "../themes/theme";
+import { defaultDiv, extraDiv } from "../styles/pendingErrorDiv";
 
 interface Props {
   data: SampleCountry[];
@@ -37,14 +38,6 @@ const GaugeChart = ({
     }
 
     return resultValue;
-  };
-
-  // styles
-  const defaultDiv = { height: "300px", width: "100%" };
-  const extraDiv = {
-    justifyContent: "center",
-    alignItems: "center",
-    display: "flex",
   };
 
   if (error)

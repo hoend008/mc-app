@@ -8,6 +8,7 @@ import createSampleCountryMapQueryOptions from "../api/queryOptions/SampleCountr
 import geodata from "../data/countries_WH.json";
 import useTheme from "../hooks/useTheme";
 import { themeSettings } from "../themes/theme";
+import { defaultDiv, extraDiv } from "../styles/pendingErrorDiv";
 
 export interface chartMainColor {
   color: string;
@@ -30,14 +31,6 @@ const MapGauge = () => {
       geodata as GeoJsonObject
     )
   );
-
-  // styles
-  const defaultDiv = { height: "300px", width: "100%" };
-  const extraDiv = {
-    justifyContent: "center",
-    alignItems: "center",
-    display: "flex",
-  };
 
   if (error)
     return (

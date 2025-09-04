@@ -12,6 +12,7 @@ import useData from "../../hooks/useData";
 import { CircularProgress, Typography } from "@mui/material";
 import { chartMainColor } from "../MapGauge";
 import { mapPolygonColorToDensity } from "./ColorUtils";
+import { defaultDiv, extraDiv } from "../../styles/pendingErrorDiv";
 
 const COLOR_SELECT = "yellow";
 const WEIGHT_SELECT = 2;
@@ -24,20 +25,15 @@ interface Props {
   mapColors: chartMainColor[];
 }
 
-const MyMap = ({
-  mapData,
-  error,
-  isPending,
-  isSuccess,
-  mapColors,
-}: Props) => {
+const MyMap = ({ mapData, error, isPending, isSuccess, mapColors }: Props) => {
 
-const { selectedFeature, setSelectedFeature, setCountryCode } = useData();
-
+  const { countryCode, setCountryCode } = useData();
+  
   const geoJsonRef = useRef(null);
 
   const [hoveredFeature, setHoveredFeature] = useState<any>(null);
-  const previousFeature = usePrevious<any>(selectedFeature);
+  //const previousFeature = usePrevious<any>(selectedFeature);
+  const previousFeature = usePrevious<any>(countryCode);
 
   const highlightFeature = (e: any) => {
     let layer = e.target;
@@ -57,7 +53,6 @@ const { selectedFeature, setSelectedFeature, setCountryCode } = useData();
       previousFeature.current !== layer.feature.properties.iso_a3.toLowerCase()
     ) {
       if (layer.feature.properties.density) {
-        setSelectedFeature(layer.feature.properties.iso_a3.toLowerCase());
         setCountryCode(layer.feature.properties.iso_a3.toLowerCase());
       }
     } else {
@@ -67,7 +62,7 @@ const { selectedFeature, setSelectedFeature, setCountryCode } = useData();
   };
 
   const resetSelect = () => {
-    setSelectedFeature(null);
+    setCountryCode("");
   };
 
   const onEachCountry = (feature: Feature, layer: Layer) => {
@@ -85,7 +80,10 @@ const { selectedFeature, setSelectedFeature, setCountryCode } = useData();
 
   const style = (feature: any) => {
     let mapStyle = {
-      fillColor: mapPolygonColorToDensity(feature.properties?.density, mapColors),
+      fillColor: mapPolygonColorToDensity(
+        feature.properties?.density,
+        mapColors
+      ),
       weight: 1,
       opacity: 1,
       color: "white",
@@ -98,8 +96,8 @@ const { selectedFeature, setSelectedFeature, setCountryCode } = useData();
     }
 
     if (
-      selectedFeature &&
-      feature.properties.iso_a3.toLowerCase() === selectedFeature
+      countryCode &&
+      feature.properties.iso_a3.toLowerCase() === countryCode
     ) {
       mapStyle.fillColor = COLOR_SELECT;
       mapStyle.weight = WEIGHT_SELECT;
@@ -109,13 +107,13 @@ const { selectedFeature, setSelectedFeature, setCountryCode } = useData();
   };
 
   useEffect(() => {
-    if (geoJsonRef.current && selectedFeature) {
+    if (geoJsonRef.current && countryCode) {
       const layer: any = geoJsonRef.current;
       let layer2 = layer
         .getLayers()
         .find(
           (layer: any) =>
-            layer.feature.properties.iso_a3.toLowerCase() === selectedFeature
+          layer.feature.properties.iso_a3.toLowerCase() === countryCode
         );
       let mapStyle = {
         fillColor: COLOR_SELECT,
@@ -126,15 +124,7 @@ const { selectedFeature, setSelectedFeature, setCountryCode } = useData();
         layer2.setStyle(mapStyle);
       }
     }
-  }, [selectedFeature]);
-
-  // styles
-  const defaultDiv = { height: "300px", width: "100%" };
-  const extraDiv = {
-    justifyContent: "center",
-    alignItems: "center",
-    display: "flex",
-  };
+  }, [countryCode]);
 
   if (error)
     return (

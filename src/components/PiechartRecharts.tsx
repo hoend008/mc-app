@@ -8,6 +8,7 @@ import { themeSettings } from "../themes/theme";
 import { useState } from "react";
 import usePrevious from "react-use-previous";
 import createSampleProductQueryOptions from "../api/queryOptions/sampleProductQueryOptions";
+import { defaultDiv, extraDiv } from "../styles/pendingErrorDiv";
 
 const data01 = [
   { name: "Group A", value: 400 },
@@ -21,14 +22,6 @@ const data01 = [
 const PiechartRecharts = () => {
   const [activeIndex, setActiveIndex] = useState(-1);
   const previousIndex = usePrevious(activeIndex);
-
-  // styles
-  const defaultDiv = { height: "300px", width: "100%" };
-  const extraDiv = {
-    justifyContent: "center",
-    alignItems: "center",
-    display: "flex",
-  };
 
   // get user authentication data
   const { auth } = useAuth();
