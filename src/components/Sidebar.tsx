@@ -1,17 +1,5 @@
-import {
-  Box,
-  Drawer,
-  Divider,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Toolbar,
-} from "@mui/material";
-import MailIcon from "@mui/icons-material/Mail";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import CountrySelect from "./CountrySelect";
+import { Box, Drawer, Divider, Toolbar } from "@mui/material";
+import ButtonFileImport from "./ButtonFileImport";
 
 export const drawerWidth = 240;
 
@@ -34,21 +22,8 @@ const Sidebar = ({
   const drawer = (
     <Box sx={{ bgcolor: "primary.main", height: "100dvh" }}>
       <Toolbar />
+      <ButtonFileImport />
       <Divider />
-      <CountrySelect />
-      <Divider />
-      <List>
-        {["Button 1", "Button 2", "Button 3"].map((text, index) => (
-          <ListItem key={text} disablePadding sx={{ color: "text.main" }}>
-            <ListItemButton>
-              <ListItemIcon sx={{ color: "text.main" }}>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
     </Box>
   );
 

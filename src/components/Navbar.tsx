@@ -65,7 +65,7 @@ const Navbar = ({ handleDrawerToggle }: Props) => {
           </IconButton>
         </Box>
         <Typography variant="h6" sx={{ color: "text.main" }}>
-          Title
+          MC App
         </Typography>
         <Box sx={{ display: "flex" }}>
           <IconButton onClick={handleChange}>

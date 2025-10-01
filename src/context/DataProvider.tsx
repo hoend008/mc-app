@@ -1,17 +1,15 @@
-import { SelectChangeEvent, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import {
   createContext,
-  Dispatch,
   ReactNode,
-  SetStateAction,
   useState,
 } from "react";
+import { DataRow } from "../components/DataTable";
 
 interface DataContextType {
-  countryCode: string;
-  setCountryCode: Dispatch<SetStateAction<string>>;
-  feedconversionID: number;
-  setFeedconversionID: Dispatch<SetStateAction<number>>;
+  data: DataRow[];
+  setData: (d: DataRow[]) => void;
+  setIsLoading: (b: boolean) => void;
 }
 
 const DataContext = createContext({} as DataContextType);
@@ -21,10 +19,9 @@ interface Props {
 }
 
 export const DataProvider = ({ children }: Props) => {
-  // set state variable that holds country and function to update country
-  const [countryCode, setCountryCode] = useState("");
 
-  const [feedconversionID, setFeedconversionID] = useState(0);
+  const [data, setData] = useState<DataRow[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   // theming
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -33,10 +30,9 @@ export const DataProvider = ({ children }: Props) => {
   return (
     <DataContext.Provider
       value={{
-        countryCode,
-        setCountryCode,
-        feedconversionID,
-        setFeedconversionID,
+        data,
+        setData,
+        setIsLoading
       }}
     >
       {children}
