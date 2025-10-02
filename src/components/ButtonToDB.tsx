@@ -1,41 +1,33 @@
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
-import apiClient from "../services/api-client";
-import { DataRow } from "./DataTable";
+import postMCDataQueryOptions from "../api/queryOptions/postMCDataQueryOptions";
+import useAuth from "../hooks/useAuth";
+import useData from "../hooks/useData";
+import postMCData from "../api/queries/postMCData";
 
-interface Props {
-  data: DataRow[];
-  onIsLoading: (b: boolean) => void;
-}
+const ButtonToDB = () => {
+  const { auth } = useAuth();
 
-const ButtonToDB = ({ data, onIsLoading }: Props) => {
+  const { data: mcdata } = useData();
+
   const exportToDB = () => {
-    onIsLoading(true);
-    apiClient
-      .post<DataRow[]>("/got", data)
-      .then((res) => {
-        console.log(res);
-        console.log(data);
-        onIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err.message);
-        onIsLoading(false);
-      });
+    const msg = postMCData(auth.accessToken, mcdata);
   };
 
   return (
-    <Button
-      color="secondary"
-      component="label"
-      role={undefined}
-      variant="contained"
-      tabIndex={-1}
-      startIcon={<SaveIcon />}
-      onClick={exportToDB}
-    >
-      Send to DB
-    </Button>
+    <Box sx={{ margin: "1rem 1rem" }}>
+      <Button
+        color="secondary"
+        component="label"
+        role={undefined}
+        variant="contained"
+        tabIndex={-1}
+        startIcon={<SaveIcon />}
+        onClick={exportToDB}
+      >
+        Send to DB
+      </Button>
+    </Box>
   );
 };
 
