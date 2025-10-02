@@ -7,7 +7,6 @@ interface returnMessage {
 
 const postMCData = async (accessToken: string, mcdata: DataRow[]) => {
   const controller = new AbortController();
-  
   const { data } = await axios<DataRow[]>({
     method: "post",
     url: "http://127.0.0.1:8000/mcdata",
@@ -18,7 +17,7 @@ const postMCData = async (accessToken: string, mcdata: DataRow[]) => {
     },
     data: mcdata,
   });
-  
+
   return data;
 };
 
