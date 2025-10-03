@@ -24,6 +24,7 @@ const ButtonToDB = () => {
         tabIndex={-1}
         startIcon={<SaveIcon />}
         onClick={exportToDB}
+        sx={{ width: 180 }}
       >
         Send to DB
       </Button>

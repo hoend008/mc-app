@@ -1,6 +1,7 @@
 import { Box, Drawer, Divider, Toolbar } from "@mui/material";
 import ButtonFileImport from "./ButtonFileImport";
 import ButtonToDB from "./ButtonToDB";
+import ButtonFileExport from "./ButtonFileExport";
 
 export const drawerWidth = 240;
 
@@ -25,6 +26,7 @@ const Sidebar = ({
       <Toolbar />
       <ButtonFileImport />
       <ButtonToDB />
+      <ButtonFileExport />
       <Divider />
     </Box>
   );

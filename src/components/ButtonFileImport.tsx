@@ -36,7 +36,9 @@ const ButtonFileImport = () => {
       const workbook = XLSX.read(data, { type: "binary" });
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
-      const parsedData = XLSX.utils.sheet_to_json<DataRow>(sheet, {defval: null});
+      const parsedData = XLSX.utils.sheet_to_json<DataRow>(sheet, {
+        defval: null,
+      });
       setData(parsedData);
       setIsLoading(false);
     };
@@ -50,7 +52,7 @@ const ButtonFileImport = () => {
         variant="contained"
         tabIndex={-1}
         startIcon={<CloudUploadIcon />}
-        sx={{ border: "1px solid " + themeColors.accent.main }}
+        sx={{ border: "1px solid " + themeColors.accent.main, width: 180 }}
       >
         Upload file
         <VisuallyHiddenInput type="file" onChange={handleFileUpload} multiple />
