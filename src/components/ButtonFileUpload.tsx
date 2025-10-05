@@ -19,7 +19,7 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const ButtonFileImport = () => {
+const ButtonFileUpload = () => {
   const { mode, accentColor } = useTheme();
   const themeColors = themeSettings(mode, accentColor);
 
@@ -61,4 +61,4 @@ const ButtonFileImport = () => {
   );
 };
 
-export default ButtonFileImport;
+export default ButtonFileUpload;

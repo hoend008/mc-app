@@ -2,8 +2,13 @@ import SaveIcon from "@mui/icons-material/Save";
 import * as XLSX from "xlsx";
 import { Box, Button } from "@mui/material";
 import useData from "../hooks/useData";
+import useTheme from "../hooks/useTheme";
+import { themeSettings } from "../themes/theme";
 
 const ButtonFileExport = () => {
+  const { mode, accentColor } = useTheme();
+  const themeColors = themeSettings(mode, accentColor);
+  
   const { data } = useData();
   const fileName = "mctabel";
 
@@ -24,7 +29,7 @@ const ButtonFileExport = () => {
         tabIndex={-1}
         startIcon={<SaveIcon />}
         onClick={exportToExcel}
-        sx={{width: 180}}
+        sx={{ border: "1px solid " + themeColors.accent.main, width: 180 }}
       >
         to Excel
       </Button>

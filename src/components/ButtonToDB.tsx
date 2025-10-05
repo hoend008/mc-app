@@ -1,11 +1,15 @@
 import { Box, Button } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
-import postMCDataQueryOptions from "../api/queryOptions/postMCDataQueryOptions";
 import useAuth from "../hooks/useAuth";
 import useData from "../hooks/useData";
 import postMCData from "../api/queries/postMCData";
+import useTheme from "../hooks/useTheme";
+import { themeSettings } from "../themes/theme";
 
 const ButtonToDB = () => {
+  const { mode, accentColor } = useTheme();
+  const themeColors = themeSettings(mode, accentColor);
+
   const { auth } = useAuth();
 
   const { data: mcdata } = useData();
@@ -24,7 +28,7 @@ const ButtonToDB = () => {
         tabIndex={-1}
         startIcon={<SaveIcon />}
         onClick={exportToDB}
-        sx={{ width: 180 }}
+        sx={{ border: "1px solid " + themeColors.accent.main, width: 180 }}
       >
         Send to DB
       </Button>

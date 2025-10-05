@@ -1,7 +1,7 @@
 import { Box, Drawer, Divider, Toolbar } from "@mui/material";
-import ButtonFileImport from "./ButtonFileImport";
+import ButtonFileUpload from "./ButtonFileUpload";
 import ButtonToDB from "./ButtonToDB";
-import ButtonFileExport from "./ButtonFileExport";
+import DownloadExcelButton from "./DownloadExcelButton";
 
 export const drawerWidth = 240;
 
@@ -24,9 +24,9 @@ const Sidebar = ({
   const drawer = (
     <Box sx={{ bgcolor: "primary.main", height: "100dvh" }}>
       <Toolbar />
-      <ButtonFileImport />
+      <ButtonFileUpload />
       <ButtonToDB />
-      <ButtonFileExport />
+      <DownloadExcelButton />
       <Divider />
     </Box>
   );
