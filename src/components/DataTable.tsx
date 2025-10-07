@@ -154,10 +154,10 @@ const columns: GridColDef[] = [
 export interface DataRow {
   team_id: number;
   identifier: number;
-  mutation_string: string;
-  insert_string: string;
+  mutation_date: string;
+  insert_date: string;
   val_report_name: string;
-  val_report_string: string;
+  val_report_date: string;
   plan_nvwa_year: number;
   groupori: string;
   use: string;

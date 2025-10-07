@@ -33,13 +33,39 @@ const ButtonFileUpload = () => {
     reader.onload = (e) => {
       if (!e.target) return;
       const data = e.target.result;
-      const workbook = XLSX.read(data, { type: "binary" });
-      const sheetName = workbook.SheetNames[0];
+      const workbook = XLSX.read(data, { type: "binary", cellDates: true });
+      const sheetName = "Input";
       const sheet = workbook.Sheets[sheetName];
-      const parsedData = XLSX.utils.sheet_to_json<DataRow>(sheet, {
+      let parsedData = XLSX.utils.sheet_to_json<DataRow>(sheet, {
+        blankrows: false,
         defval: null,
       });
-      setData(parsedData);
+
+      // cleanup (in case some blanks slip through)
+      parsedData = parsedData.filter((row) =>
+        Object.values(row).some(
+          (v) => v !== null && v !== undefined && v !== ""
+        )
+      );
+
+      // remove first line
+      parsedData = parsedData.slice(1);
+
+      // Format all Date objects using toISOString (yyyy-mm-ddTHH:MM:SS.sssZ)
+      let formattedData = parsedData.map((row) => {
+        const newRow: { [key: string]: any } = { ...row };
+        Object.keys(newRow).forEach((key) => {
+          const value = newRow[key];
+          if (value instanceof Date) {
+            // Shorten ISO string to "yyyy-mm-dd" or "yyyy-mm-dd HH:MM:SS"
+            const iso = value.toLocaleDateString("en-CA").split("T")[0];
+            newRow[key] = iso;
+          }
+        });
+        return newRow;
+      });
+      console.log(formattedData);
+      setData(formattedData as DataRow[]);
       setIsLoading(false);
     };
   };

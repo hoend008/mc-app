@@ -17,7 +17,7 @@ const DownloadExcelButton = () => {
 
       // Call the FastAPI endpoint
       const response = await fetch(
-        "http://127.0.0.1:8000/mcdata/appendMCdata/",
+        "http://127.0.0.1:8000/mcdata/download/",
         {
           method: "POST",
           headers: {
