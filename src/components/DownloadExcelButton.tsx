@@ -1,10 +1,12 @@
-import { Box, Button } from "@mui/material";
+import { Alert, Box, Button, CircularProgress, Snackbar } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import useTheme from "../hooks/useTheme";
 import { themeSettings } from "../themes/theme";
 import useData from "../hooks/useData";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
+import { useState } from "react";
+import downloadMCData from "../api/queries/downloadMCData";
 
 const DownloadExcelButton = () => {
   const { mode, accentColor } = useTheme();
@@ -16,31 +18,24 @@ const DownloadExcelButton = () => {
   // get selected SOP
   const { sop } = useData();
 
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+  const [severity, setSeverity] = useState<"success" | "error" | "warning">(
+    "success"
+  );
+
   const handleDownload = async () => {
-    const controller = new AbortController();
+    setLoading(true);
+    setMessage(null);
+
     try {
       // Call the FastAPI endpoint
-      const response = await axios(
-        "http://127.0.0.1:8000/mcdata/download/",
-        {
-          method: "GET",
-          responseType: "blob",
-          signal: controller.signal,
-          headers: { Authorization: "Bearer " + auth.accessToken },
-          params: {
-            sop: sop
-          }
-        }
-      );
+      const data = await downloadMCData(auth.accessToken, sop);
+      setSeverity("success");
+      setMessage("Download initiated successfully!");
 
-      //if (!response.ok) {
-      //  throw new Error(`HTTP error! Status: ${response.status}`);
-      //}
-
-      // Convert response to a blob
-      //const blob = await response.blob();
-          // Create a blob URL and trigger download
-      const blob = new Blob([response.data], {
+      // Create a blob URL and trigger download
+      const blob = new Blob([data], {
         type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       });
 
@@ -58,7 +53,10 @@ const DownloadExcelButton = () => {
       a.remove();
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error("Failed to download Excel file:", error);
+      setSeverity("error");
+      setMessage("Operation failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -68,12 +66,32 @@ const DownloadExcelButton = () => {
         variant="contained"
         color="secondary"
         onClick={handleDownload}
-        startIcon={<SaveIcon />}
+        startIcon={
+          loading ? (
+            <CircularProgress color="inherit" size={20} />
+          ) : (
+            <SaveIcon />
+          )
+        }
         sx={{ border: "1px solid " + themeColors.accent.main, width: 180 }}
-        
       >
-        To Excel
+        {loading ? "Processing..." : "To Excel"}
       </Button>
+      <Snackbar
+        open={!!message}
+        autoHideDuration={3000}
+        onClose={() => setMessage(null)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={() => setMessage(null)}
+          severity={severity}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

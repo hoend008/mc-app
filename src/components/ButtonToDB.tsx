@@ -16,17 +16,18 @@ const ButtonToDB = () => {
   const { auth } = useAuth();
 
   const { data: mcdata } = useData();
-  
+
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
-  const [severity, setSeverity] = useState<"success" | "error" | "warning">("success");
+  const [severity, setSeverity] = useState<"success" | "error" | "warning">(
+    "success"
+  );
 
   const handleClick = async () => {
     setLoading(true);
     setMessage(null);
 
     try {
-      const controller = new AbortController();
       await postMCData(auth.accessToken, mcdata);
       setSeverity("success");
       setMessage("Operation completed successfully!");
@@ -44,11 +45,12 @@ const ButtonToDB = () => {
         variant="contained"
         color="secondary"
         onClick={handleClick}
-        disabled={loading}
         startIcon={
           loading ? (
             <CircularProgress color="inherit" size={20} />
-          ) : <SaveIcon />
+          ) : (
+            <SaveIcon />
+          )
         }
         sx={{ border: "1px solid " + themeColors.accent.main, width: 180 }}
       >

@@ -290,22 +290,22 @@ const DataTable = () => {
             width: "12px",
           },
 
-          /* Up */
-          "& ::-webkit-scrollbar-button:vertical:decrement": {
-            borderWidth: "0 7px 12px 7px",
+          /* LEFT */
+          "& ::-webkit-scrollbar-button:horizontal:decrement": {
+            borderWidth: "7px 12px 7px 0",
             borderColor:
-              "transparent transparent " +
+              "transparent " +
               themeColors.neutral.light +
-              " transparent ",
+              " transparent transparent ",
             backgroundColor: themeColors.neutral.main,
           },
 
-          /* Up */
-          "& ::-webkit-scrollbar-button:vertical:increment": {
-            borderWidth: "12px 7px 0 7px",
+          /* RIGHT */
+          "& ::-webkit-scrollbar-button:horizontal:increment": {
+            borderWidth: "7px 0 7px 12px",
             borderColor:
-              themeColors.neutral.light +
-              " transparent transparent transparent",
+              " transparent transparent transparent" +
+              themeColors.neutral.light,
             backgroundColor: themeColors.neutral.main,
           },
         }}
