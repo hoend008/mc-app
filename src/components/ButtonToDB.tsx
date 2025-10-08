@@ -1,10 +1,13 @@
-import { Box, Button } from "@mui/material";
+import { useState } from "react";
 import SaveIcon from "@mui/icons-material/Save";
+import { Button, CircularProgress, Snackbar, Alert, Box } from "@mui/material";
+import useTheme from "../hooks/useTheme";
+import { themeSettings } from "../themes/theme";
+import axios from "axios";
+import { DataRow } from "./DataTable";
 import useAuth from "../hooks/useAuth";
 import useData from "../hooks/useData";
 import postMCData from "../api/queries/postMCData";
-import useTheme from "../hooks/useTheme";
-import { themeSettings } from "../themes/theme";
 
 const ButtonToDB = () => {
   const { mode, accentColor } = useTheme();
@@ -13,25 +16,60 @@ const ButtonToDB = () => {
   const { auth } = useAuth();
 
   const { data: mcdata } = useData();
+  
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+  const [severity, setSeverity] = useState<"success" | "error" | "warning">("success");
 
-  const exportToDB = () => {
-    const msg = postMCData(auth.accessToken, mcdata);
+  const handleClick = async () => {
+    setLoading(true);
+    setMessage(null);
+
+    try {
+      const controller = new AbortController();
+      await postMCData(auth.accessToken, mcdata);
+      setSeverity("success");
+      setMessage("Operation completed successfully!");
+    } catch (error) {
+      setSeverity("error");
+      setMessage("Operation failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <Box sx={{ margin: "1rem 1rem" }}>
       <Button
-        color="secondary"
-        component="label"
-        role={undefined}
         variant="contained"
-        tabIndex={-1}
-        startIcon={<SaveIcon />}
-        onClick={exportToDB}
+        color="secondary"
+        onClick={handleClick}
+        disabled={loading}
+        startIcon={
+          loading ? (
+            <CircularProgress color="inherit" size={20} />
+          ) : <SaveIcon />
+        }
         sx={{ border: "1px solid " + themeColors.accent.main, width: 180 }}
       >
-        Send to DB
+        {loading ? "Processing..." : "To DB"}
       </Button>
+
+      <Snackbar
+        open={!!message}
+        autoHideDuration={3000}
+        onClose={() => setMessage(null)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={() => setMessage(null)}
+          severity={severity}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

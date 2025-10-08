@@ -1,5 +1,6 @@
 import axios from "axios";
 import { DataRow } from "../../components/DataTable";
+import useData from "../../hooks/useData";
 
 interface returnMessage {
   msg: string;
@@ -18,7 +19,6 @@ const postMCData = async (accessToken: string, mcdata: DataRow[]) => {
     data: mcdata,
   });
 
-  return data;
 };
 
 export default postMCData;

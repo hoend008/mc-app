@@ -1,8 +1,9 @@
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import useData from "../hooks/useData";
 import useTheme from "../hooks/useTheme";
 import { themeSettings } from "../themes/theme";
+import { defaultDiv, extraDiv } from "../styles/pendingErrorDiv";
 
 const columns: GridColDef[] = [
   { field: "team_id", headerName: "team_id", type: "number", editable: true },
@@ -218,7 +219,14 @@ const DataTable = () => {
   const { mode, accentColor } = useTheme();
   const themeColors = themeSettings(mode, accentColor);
 
-  const { data } = useData();
+  const { data, isLoading } = useData();
+
+  if (isLoading)
+    return (
+      <div style={{ ...defaultDiv, ...extraDiv }}>
+        <CircularProgress color="success" size="5rem" />
+      </div>
+    );
 
   return (
     <Box sx={{ height: "500px", width: "100%" }}>

@@ -9,6 +9,7 @@ import { DataRow } from "../components/DataTable";
 interface DataContextType {
   data: DataRow[];
   setData: (d: DataRow[]) => void;
+  isLoading: boolean;
   setIsLoading: (b: boolean) => void;
 }
 
@@ -32,6 +33,7 @@ export const DataProvider = ({ children }: Props) => {
       value={{
         data,
         setData,
+        isLoading,
         setIsLoading
       }}
     >
