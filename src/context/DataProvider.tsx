@@ -1,12 +1,16 @@
 import { useMediaQuery } from "@mui/material";
 import {
   createContext,
+  Dispatch,
   ReactNode,
+  SetStateAction,
   useState,
 } from "react";
 import { DataRow } from "../components/DataTable";
 
 interface DataContextType {
+  sop: string;
+  setSop: Dispatch<SetStateAction<string>>;
   data: DataRow[];
   setData: (d: DataRow[]) => void;
   isLoading: boolean;
@@ -21,6 +25,7 @@ interface Props {
 
 export const DataProvider = ({ children }: Props) => {
 
+  const [sop, setSop] = useState("");
   const [data, setData] = useState<DataRow[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -31,6 +36,8 @@ export const DataProvider = ({ children }: Props) => {
   return (
     <DataContext.Provider
       value={{
+        sop,
+        setSop,
         data,
         setData,
         isLoading,

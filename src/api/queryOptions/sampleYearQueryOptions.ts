@@ -1,14 +1,12 @@
 import { queryOptions } from "@tanstack/react-query";
-import getSampleYear from "../queries/getSampleYear";
+import getSop from "../queries/getSop";
 
-export default function createSampleYearQueryOptions(
+export default function createSopQueryOptions(
   accessToken: string,
-  countryID: string,
-  feedconversionID: number,
 ) {
   return queryOptions({
-    queryKey: ["sampleyear", countryID, feedconversionID],
-    queryFn: () => getSampleYear(accessToken, countryID, feedconversionID),
+    queryKey: ["sop"],
+    queryFn: () => getSop(accessToken),
     staleTime: 2 * 60 * 1000, // 2 minutes
   });
 }

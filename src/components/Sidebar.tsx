@@ -1,7 +1,15 @@
-import { Box, Drawer, Divider, Toolbar } from "@mui/material";
+import {
+  Box,
+  Drawer,
+  Divider,
+  Toolbar,
+  Stack,
+  Typography,
+} from "@mui/material";
 import ButtonFileUpload from "./ButtonFileUpload";
 import DownloadExcelButton from "./DownloadExcelButton";
 import ButtonToDB from "./ButtonToDB";
+import SopSelect from "./SopSelect";
 
 export const drawerWidth = 240;
 
@@ -23,11 +31,24 @@ const Sidebar = ({
 
   const drawer = (
     <Box sx={{ bgcolor: "primary.main", height: "100dvh" }}>
-      <Toolbar />
-      <ButtonFileUpload />
-      <ButtonToDB />
-      <DownloadExcelButton />
-      <Divider />
+      <Stack spacing={4} alignItems="center">
+        <Toolbar />{" "}
+        <Stack spacing={2}>
+          <Typography variant="h4" sx={{ color: "text.main" }}>
+            To Database
+          </Typography>
+          <ButtonFileUpload />
+          <ButtonToDB />
+        </Stack>
+        <Stack spacing={2}>
+        <Divider sx={{ borderBottomWidth: 3, borderColor: "text.main" }}/>
+          <Typography variant="h4" sx={{ color: "text.main" }}>
+            Download
+          </Typography>
+          <SopSelect />
+          <DownloadExcelButton />
+        </Stack>
+      </Stack>
     </Box>
   );
 
