@@ -229,7 +229,7 @@ const DataTable = () => {
     );
 
   return (
-    <Box sx={{ height: "500px", width: "100%" }}>
+    <Box sx={{ height: "80vh", width: "100%" }}>
       <DataGrid
         rows={data}
         columns={columns}
@@ -272,7 +272,12 @@ const DataTable = () => {
             opacity: 1,
             color: "text.main",
           },
-
+          "& .MuiTablePagination-root": {
+            color: "text.main", // changes the pagination text color
+          },
+          "& .MuiTablePagination-actions button": {
+            color: "text.main",
+          },
           "& ::-webkit-scrollbar": {
             width: "12px",
           },

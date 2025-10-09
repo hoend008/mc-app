@@ -1,7 +1,6 @@
-import { Box, Grid, Toolbar } from "@mui/material";
+import { Box, Grid, Paper, Toolbar } from "@mui/material";
 import { drawerWidth } from "../components/Layout";
 import DataTable from "../components/DataTable";
-
 
 const Home = () => {
   return (
@@ -10,7 +9,7 @@ const Home = () => {
         flexGrow: 1,
         p: 2,
         width: { sm: `calc(100% - ${drawerWidth}px)` },
-        height: { sm: "100%", md: "100%" },
+        height: "100vh",
         bgcolor: "primary.main",
       }}
     >
