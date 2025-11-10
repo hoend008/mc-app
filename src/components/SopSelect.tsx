@@ -41,10 +41,21 @@ const SopSelect = () => {
         <InputLabel id="demo-simple-select-label">SOP</InputLabel>
         <Select
           MenuProps={{
-            sx: {
-              "&& .Mui-selected": {
-                color: "text.main",
-                background: themeColors.neutral.light,
+            PaperProps: {
+              sx: {
+                mt: 0,
+                pt: 0,
+                pb: 0,
+
+                "& .MuiMenu-list, & .MuiList-root": {
+                  pt: 0,
+                  pb: 0,
+                },
+
+                // optional: remove pseudo elements or shadows
+                "&::before, &::after": {
+                  display: "none",
+                },
               },
             },
           }}
@@ -66,7 +77,13 @@ const SopSelect = () => {
             <MenuItem
               key={data.sop}
               value={data.sop}
-              sx={{ color: "text.main", backgroundColor: "secondary.main" }}
+              sx={{
+                color: "text.main",
+                backgroundColor: "secondary.main",
+                "&:hover": {
+                  backgroundColor: "neutral.light",
+                },
+              }}
             >
               {titleCase(data.sop)}
             </MenuItem>

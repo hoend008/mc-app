@@ -121,7 +121,6 @@ const columns: GridColDef[] = [
   {
     field: "evallowlimit",
     headerName: "evallowlimit",
-    type: "number",
     editable: true,
   },
   {
