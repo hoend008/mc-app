@@ -43,6 +43,30 @@ const SopSelect = () => {
           MenuProps={{
             PaperProps: {
               sx: {
+                "& .MuiMenuItem-root": {
+                  color: "text.main",
+                  backgroundColor: "secondary.main", // default bg
+                  "&:hover": {
+                    // hover effect
+                    backgroundColor: "neutral.light",
+                  },
+                },
+                "& .MuiMenuItem-root.Mui-selected": {
+                  backgroundColor: themeColors.accent.main, // selected bg
+                  color: "text.main",
+                  "&:hover": {
+                    // hover effect
+                    backgroundColor: "neutral.light",
+                  },
+                },
+                "& .MuiMenuItem-root.Mui-focusVisible": {
+                  backgroundColor: "secondary.main", // focused item bg
+                  color: "text.main",
+                  "&:hover": {
+                    // hover effect
+                    backgroundColor: "neutral.light",
+                  },
+                },
                 mt: 0,
                 pt: 0,
                 pb: 0,
@@ -74,17 +98,7 @@ const SopSelect = () => {
           onChange={handleSopChange}
         >
           {data?.map((data) => (
-            <MenuItem
-              key={data.sop}
-              value={data.sop}
-              sx={{
-                color: "text.main",
-                backgroundColor: "secondary.main",
-                "&:hover": {
-                  backgroundColor: "neutral.light",
-                },
-              }}
-            >
+            <MenuItem key={data.sop} value={data.sop}>
               {titleCase(data.sop)}
             </MenuItem>
           ))}
