@@ -3,13 +3,14 @@ import SaveIcon from "@mui/icons-material/Save";
 import { Button, CircularProgress, Snackbar, Alert, Box } from "@mui/material";
 import useTheme from "../hooks/useTheme";
 import { themeSettings } from "../themes/theme";
-import axios from "axios";
-import { DataRow } from "./DataTable";
 import useAuth from "../hooks/useAuth";
 import useData from "../hooks/useData";
 import postMCData from "../api/queries/postMCData";
+import { useQueryClient } from "@tanstack/react-query";
 
 const ButtonToDB = () => {
+  const queryClient = useQueryClient();
+
   const { mode, accentColor } = useTheme();
   const themeColors = themeSettings(mode, accentColor);
 
@@ -31,6 +32,9 @@ const ButtonToDB = () => {
       await postMCData(auth.accessToken, mcdata);
       setSeverity("success");
       setMessage("Operation completed successfully!");
+      // Tell React Query to refresh dropdown data
+      queryClient.invalidateQueries({ queryKey: ["sop"] });
+
     } catch (error) {
       setSeverity("error");
       setMessage("Operation failed. Please try again.");

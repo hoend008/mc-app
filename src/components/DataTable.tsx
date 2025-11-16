@@ -312,6 +312,24 @@ const DataTable = () => {
               themeColors.neutral.light,
             backgroundColor: themeColors.neutral.main,
           },
+          /* DOWN */
+          "& ::-webkit-scrollbar-button:vertical:decrement": {
+            borderWidth: "0 7px 12px 7px",
+            borderColor:
+              "transparent transparent " +
+              themeColors.neutral.light +
+              " transparent ",
+            backgroundColor: themeColors.neutral.main,
+          },
+
+          /* Up */
+          "& ::-webkit-scrollbar-button:vertical:increment": {
+            borderWidth: "12px 7px 0 7px",
+            borderColor:
+              themeColors.neutral.light +
+              " transparent transparent transparent",
+            backgroundColor: themeColors.neutral.main,
+          },
         }}
       />
     </Box>

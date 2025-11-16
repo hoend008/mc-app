@@ -12,7 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 import titleCase from "../utils/titleCase";
 import useTheme from "../hooks/useTheme";
 import { themeSettings } from "../themes/theme";
-import createSopQueryOptions from "../api/queryOptions/sampleYearQueryOptions";
+import createSopQueryOptions from "../api/queryOptions/SOPQueryOptions";
 
 const SopSelect = () => {
   const { mode, accentColor } = useTheme();
@@ -21,10 +21,10 @@ const SopSelect = () => {
   // get user authentication data
   const { auth } = useAuth();
 
+  const { sop, setSop } = useData();
+
   // get feed food
   const { data } = useQuery(createSopQueryOptions(auth.accessToken));
-
-  const { sop, setSop } = useData();
 
   const handleSopChange = (e: SelectChangeEvent) => {
     const sop = e.target.value;
