@@ -9,6 +9,8 @@ import {
 import { DataRow } from "../components/DataTable";
 
 interface DataContextType {
+  validsop: boolean;
+  setValidsop: (b: boolean) => void;
   sop: string[];
   setSop: Dispatch<SetStateAction<string[]>>;
   data: DataRow[];
@@ -25,6 +27,7 @@ interface Props {
 
 export const DataProvider = ({ children }: Props) => {
 
+  const [validsop, setValidsop] = useState(false)
   const [sop, setSop] = useState<string[]>([]);
   const [data, setData] = useState<DataRow[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +39,8 @@ export const DataProvider = ({ children }: Props) => {
   return (
     <DataContext.Provider
       value={{
+        validsop,
+        setValidsop,
         sop,
         setSop,
         data,

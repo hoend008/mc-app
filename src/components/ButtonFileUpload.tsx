@@ -6,6 +6,9 @@ import { DataRow } from "./DataTable";
 import useData from "../hooks/useData";
 import useTheme from "../hooks/useTheme";
 import { themeSettings } from "../themes/theme";
+import { useQuery } from "@tanstack/react-query";
+import createSopFromUserQueryOptions from "../api/queryOptions/SOPFromUserQueryOptions";
+import useAuth from "../hooks/useAuth";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -23,7 +26,14 @@ const ButtonFileUpload = () => {
   const { mode, accentColor } = useTheme();
   const themeColors = themeSettings(mode, accentColor);
 
-  const { setData, setIsLoading } = useData();
+  const { setData, setIsLoading, setValidsop } = useData();
+
+  // get user authentication data
+  const { auth } = useAuth();
+
+  const { data: sops } = useQuery(
+    createSopFromUserQueryOptions(auth.accessToken)
+  );
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsLoading(true);
@@ -64,7 +74,19 @@ const ButtonFileUpload = () => {
         });
         return newRow;
       });
-      console.log(formattedData);
+
+      // now check sops in data with sops from user
+      const sopsData = Array.from(
+        new Set(formattedData.map((item) => item.anmethodref.toLowerCase()))
+      );
+
+      const sopsUser = Array.from(
+        new Set(sops?.map((item) => item.sop.toLowerCase()))
+      );
+
+      const allInUser = sopsData.every((value) => sopsUser.includes(value));
+
+      setValidsop(allInUser);
       setData(formattedData as DataRow[]);
       setIsLoading(false);
     };

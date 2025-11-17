@@ -16,7 +16,7 @@ const ButtonToDB = () => {
 
   const { auth } = useAuth();
 
-  const { data: mcdata } = useData();
+  const { data: mcdata, validsop } = useData();
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -34,7 +34,6 @@ const ButtonToDB = () => {
       setMessage("Operation completed successfully!");
       // Tell React Query to refresh dropdown data
       queryClient.invalidateQueries({ queryKey: ["sop"] });
-
     } catch (error) {
       setSeverity("error");
       setMessage("Operation failed. Please try again.");
@@ -49,6 +48,7 @@ const ButtonToDB = () => {
         variant="contained"
         color="secondary"
         onClick={handleClick}
+        disabled={!validsop}
         startIcon={
           loading ? (
             <CircularProgress color="inherit" size={20} />
@@ -56,7 +56,15 @@ const ButtonToDB = () => {
             <SaveIcon />
           )
         }
-        sx={{ border: "1px solid " + themeColors.accent.main, width: 180 }}
+        sx={{
+          "&.Mui-disabled": {
+            backgroundColor: "neutral.main",
+            color: "text.main", // or whatever you want the disabled text color to be
+          },
+          color: "text.main",
+          border: "1px solid " + themeColors.accent.main,
+          width: 180,
+        }}
       >
         {loading ? "Processing..." : "To DB"}
       </Button>

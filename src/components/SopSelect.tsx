@@ -23,7 +23,7 @@ const SopSelect = () => {
 
   const { sop, setSop } = useData();
 
-  // get feed food
+  // get sop data
   const { data } = useQuery(createSopQueryOptions(auth.accessToken));
 
   const handleSopChange = (e: SelectChangeEvent<string[]>) => {
