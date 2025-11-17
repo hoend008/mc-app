@@ -9,8 +9,8 @@ import {
 import { DataRow } from "../components/DataTable";
 
 interface DataContextType {
-  sop: string;
-  setSop: Dispatch<SetStateAction<string>>;
+  sop: string[];
+  setSop: Dispatch<SetStateAction<string[]>>;
   data: DataRow[];
   setData: (d: DataRow[]) => void;
   isLoading: boolean;
@@ -25,7 +25,7 @@ interface Props {
 
 export const DataProvider = ({ children }: Props) => {
 
-  const [sop, setSop] = useState("");
+  const [sop, setSop] = useState<string[]>([]);
   const [data, setData] = useState<DataRow[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 

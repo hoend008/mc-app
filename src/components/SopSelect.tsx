@@ -26,10 +26,10 @@ const SopSelect = () => {
   // get feed food
   const { data } = useQuery(createSopQueryOptions(auth.accessToken));
 
-  const handleSopChange = (e: SelectChangeEvent) => {
+  const handleSopChange = (e: SelectChangeEvent<string[]>) => {
     const sop = e.target.value;
     if (sop) {
-      setSop(sop);
+      setSop(sop as string[]);
     } else {
       return;
     }
@@ -40,6 +40,7 @@ const SopSelect = () => {
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">SOP</InputLabel>
         <Select
+          multiple
           MenuProps={{
             PaperProps: {
               sx: {
