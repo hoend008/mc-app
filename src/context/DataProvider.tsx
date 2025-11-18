@@ -31,7 +31,7 @@ interface Props {
 
 export const DataProvider = ({ children }: Props) => {
 
-  const [validsop, setValidsop] = useState(true)
+  const [validsop, setValidsop] = useState(false)
   const [invalidSops, setInvalidSops] = useState<string[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [sop, setSop] = useState<string[]>([]);

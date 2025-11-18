@@ -93,10 +93,10 @@ const ButtonFileUpload = () => {
         new Set(sops?.map((item) => item.sop.toLowerCase()))
       );
 
-      //const allInUser = sopsData.every((value) => sopsUser.includes(value));
+      // if there are invalid sops, set validsops to false. This will trigger modal and will disable ButtonToDB
       const invalidSops = sopsData.filter((value) => !sopsUser.includes(value));
       const validSops = invalidSops.length === 0;
-      
+
       setValidsop(validSops);
       setInvalidSops(invalidSops);
       setData(formattedData as DataRow[]);
@@ -107,7 +107,7 @@ const ButtonFileUpload = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
-    if (!validsop) {
+    if (invalidSops.length > 0) {
       setModalOpen(true);
     }
   }, [invalidSops]);
