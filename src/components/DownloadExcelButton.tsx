@@ -64,7 +64,6 @@ const DownloadExcelButton = () => {
     <Box sx={{ margin: "1rem 1rem" }}>
       <Button
         variant="contained"
-        color="secondary"
         onClick={handleDownload}
         startIcon={
           loading ? (

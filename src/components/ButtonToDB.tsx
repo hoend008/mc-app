@@ -46,7 +46,6 @@ const ButtonToDB = () => {
     <Box sx={{ margin: "1rem 1rem" }}>
       <Button
         variant="contained"
-        color="secondary"
         onClick={handleClick}
         disabled={!validsop}
         startIcon={

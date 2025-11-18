@@ -9,6 +9,8 @@ import { themeSettings } from "../themes/theme";
 import { useQuery } from "@tanstack/react-query";
 import createSopFromUserQueryOptions from "../api/queryOptions/SOPFromUserQueryOptions";
 import useAuth from "../hooks/useAuth";
+import WarningModal from "./WarningModal";
+import { useEffect, useState } from "react";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -26,7 +28,14 @@ const ButtonFileUpload = () => {
   const { mode, accentColor } = useTheme();
   const themeColors = themeSettings(mode, accentColor);
 
-  const { setData, setIsLoading, setValidsop } = useData();
+  const {
+    setData,
+    validsop,
+    invalidSops,
+    setInvalidSops,
+    setIsLoading,
+    setValidsop,
+  } = useData();
 
   // get user authentication data
   const { auth } = useAuth();
@@ -84,28 +93,50 @@ const ButtonFileUpload = () => {
         new Set(sops?.map((item) => item.sop.toLowerCase()))
       );
 
-      const allInUser = sopsData.every((value) => sopsUser.includes(value));
-
-      setValidsop(allInUser);
+      //const allInUser = sopsData.every((value) => sopsUser.includes(value));
+      const invalidSops = sopsData.filter((value) => !sopsUser.includes(value));
+      const validSops = invalidSops.length === 0;
+      
+      setValidsop(validSops);
+      setInvalidSops(invalidSops);
       setData(formattedData as DataRow[]);
       setIsLoading(false);
     };
   };
 
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (!validsop) {
+      setModalOpen(true);
+    }
+  }, [invalidSops]);
+
   return (
-    <Box sx={{ margin: "1rem 1rem" }}>
-      <Button
-        component="label"
-        role={undefined}
-        variant="contained"
-        tabIndex={-1}
-        startIcon={<CloudUploadIcon />}
-        sx={{ border: "1px solid " + themeColors.accent.main, width: 180 }}
-      >
-        Upload file
-        <VisuallyHiddenInput type="file" onChange={handleFileUpload} multiple />
-      </Button>
-    </Box>
+    <>
+      <WarningModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        invalidSops={invalidSops}
+      />
+      <Box sx={{ margin: "1rem 1rem" }}>
+        <Button
+          component="label"
+          role={undefined}
+          variant="contained"
+          tabIndex={-1}
+          startIcon={<CloudUploadIcon />}
+          sx={{ border: "1px solid " + themeColors.accent.main, width: 180 }}
+        >
+          Upload file
+          <VisuallyHiddenInput
+            type="file"
+            onChange={handleFileUpload}
+            multiple
+          />
+        </Button>
+      </Box>
+    </>
   );
 };
 

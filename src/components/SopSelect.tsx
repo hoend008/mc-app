@@ -46,7 +46,7 @@ const SopSelect = () => {
               sx: {
                 "& .MuiMenuItem-root": {
                   color: "text.main",
-                  backgroundColor: "secondary.main", // default bg
+                  backgroundColor: "primary.main", // default bg
                   "&:hover": {
                     // hover effect
                     backgroundColor: "neutral.light",
@@ -87,9 +87,12 @@ const SopSelect = () => {
           sx={{
             width: 180,
             color: "text.main",
-            backgroundColor: "secondary.main",
+            backgroundColor: "primary.main",
             ".MuiOutlinedInput-notchedOutline": {
               borderColor: themeColors.accent.main,
+            },
+            "& .MuiSelect-icon": {
+              color: themeColors.accent.main,
             },
           }}
           labelId="demo-simple-select-label"
